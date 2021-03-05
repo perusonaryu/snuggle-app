@@ -10,7 +10,6 @@ jobs:
     environment:
       - DB_HOST: 127.0.0.1
     steps:
-      - run: echo "Hello World" #==========この行を削除
       #==========ここから追加==========
       - checkout
       - run: sudo apt update 
@@ -19,7 +18,13 @@ jobs:
       - run: sudo docker-php-ext-install zip pdo_mysql
       - run: sudo docker-php-ext-install gd
       - run: sudo composer self-update --1
+      - restore_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
       - run: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
       - run: npm ci
       - run: npm run dev
       - run:
