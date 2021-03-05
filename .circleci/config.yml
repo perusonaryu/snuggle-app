@@ -12,12 +12,6 @@ jobs:
     steps:
       #==========ここから追加==========
       - checkout
-      - run: sudo apt update 
-      - run: sudo apt-get install -y libpng-dev libjpeg-dev
-      - run: sudo docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include
-      - run: sudo docker-php-ext-install zip pdo_mysql
-      - run: sudo docker-php-ext-install gd
-      - run: sudo composer self-update --1
       - restore_cache:
         key: composer-v1-{{ checksum "composer.lock" }}
       - run: composer install -n --prefer-dist
@@ -25,6 +19,13 @@ jobs:
         key: composer-v1-{{ checksum "composer.lock" }}
         paths:
           - vendor
+      - run: sudo apt update 
+      - run: sudo apt-get install -y libpng-dev libjpeg-dev
+      - run: sudo docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include
+      - run: sudo docker-php-ext-install zip pdo_mysql
+      - run: sudo docker-php-ext-install gd
+      - run: sudo composer self-update --1
+      
       - run: npm ci
       - run: npm run dev
       - run:
