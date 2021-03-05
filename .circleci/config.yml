@@ -3,10 +3,21 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_DATABASE: testdb
+          - MYSQL_ROOT_PASSWORD: root
+    environment:
+      - DB_HOST: 127.0.0.1
     steps:
       - run: echo "Hello World" #==========この行を削除
       #==========ここから追加==========
       - checkout
+      - run: sudo apt update 
+      - run: sudo apt-get install -y libpng-dev libjpeg-dev
+      - run: sudo docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include
+      - run: sudo docker-php-ext-install zip pdo_mysql
+      - run: sudo docker-php-ext-install gd
       - run: sudo composer self-update --1
       - run: composer install -n --prefer-dist
       - run: npm ci

@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
 use App\Cat;
-
 use Illuminate\Http\UploadedFile;
 
 class CatTest extends TestCase
@@ -22,7 +21,7 @@ class CatTest extends TestCase
      */
     public function testCatRegister()
     {
-        $dummyImage = UploadedFile::fake()->image('test.jpg');
+        $dummyImage = UploadedFile::fake()->image('test.png');
         $user = factory(User::class)->create();
         // dd($dummyImage);
         $cat = [
