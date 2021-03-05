@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: circleci/php:7.3-node-browsers
     environment:
-      - DB_CONNECTION: circle_testing
+      - DB_HOST: 127.0.0.1
     steps:
       - run: echo "Hello World" #==========この行を削除
       #==========ここから追加==========
