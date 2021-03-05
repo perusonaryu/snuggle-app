@@ -21,7 +21,7 @@ class CatTest extends TestCase
      */
     public function testCatRegister()
     {
-        $dummyImage = UploadedFile::fake()->image('test.jpg');
+        $dummyImage = UploadedFile::fake()->image('test.jpeg');
         $user = factory(User::class)->create();
         // dd($dummyImage);
         $cat = [
