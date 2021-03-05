@@ -13,6 +13,8 @@ jobs:
       - run: echo "Hello World" #==========この行を削除
       #==========ここから追加==========
       - checkout
+      - run: sudo apt update
+      - run: sudo docker-php-ext-install zip pdo_mysql
       - run: sudo composer self-update --1
       - run: composer install -n --prefer-dist
       - run: npm ci
