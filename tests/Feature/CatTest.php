@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\User;
 use App\Cat;
-
 use Illuminate\Http\UploadedFile;
 
 class CatTest extends TestCase
