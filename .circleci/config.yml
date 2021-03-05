@@ -19,8 +19,8 @@ jobs:
       - run: sudo docker-php-ext-install zip pdo_mysql
       - run: sudo docker-php-ext-install gd
       - run: sudo composer self-update --1
-       - restore_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
+      - restore_cache:
+        key: composer-v1-{{ checksum "composer.lock" }}
       - run: composer install -n --prefer-dist
       - save_cache:
         key: composer-v1-{{ checksum "composer.lock" }}
