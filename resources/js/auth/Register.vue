@@ -47,7 +47,7 @@
           ></v-select>
           <v-file-input
             multiple
-            label="猫画像"
+            label="プロフィール画像"
             prepend-inner-icon="mdi-camera"
             prepend-icon
             show-size
