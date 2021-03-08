@@ -2,16 +2,6 @@
   <div>
     <div class="top-image">
       <img src="/storage/cat-top-image.jpg" alt="" />
-      <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="地域で検索"
-          aria-label="Search"
-          v-model="searchWord"
-        />
-
-      </form>
     </div>
 
     <v-container>
