@@ -58,8 +58,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .login-form {
   max-width: 500px;
   margin: 100px auto 0;

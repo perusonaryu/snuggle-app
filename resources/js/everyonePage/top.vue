@@ -10,13 +10,7 @@
           aria-label="Search"
           v-model="searchWord"
         />
-        <router-link
-          :to="{
-            name: 'catSearched',
-          }"
-        >
-          <v-btn>猫を探す</v-btn>
-        </router-link>
+
       </form>
     </div>
 
