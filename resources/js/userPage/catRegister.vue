@@ -2,7 +2,15 @@
   <v-container class="cat-register" v-if="user">
     <h2 class="text-center mb-5">猫を登録</h2>
     <v-text-field v-model="form.name" type="text" label="お名前" outlined></v-text-field>
-    <v-text-field v-model="form.age" type="text" label="年齢" outlined></v-text-field>
+    <v-select
+      :items="ageData"
+      item-text="age"
+      item-value="age"
+      label="年齢"
+      v-model="form.age"
+      outlined
+      required
+    ></v-select>
     <v-text-field v-model="form.personality" type="text" label="性格" outlined></v-text-field>
     <v-select
       :items="genderData"
@@ -44,10 +52,19 @@ export default {
     },
     userData: '',
     confirmedImage: '',
-    genderData:[
-      { "name":"オス"  },
-      { "name":"メス"  }
-    ]
+    genderData: [{ name: 'オス' }, { name: 'メス' }],
+    ageData: [
+      { age: '1' },
+      { age: '2' },
+      { age: '3' },
+      { age: '4' },
+      { age: '5' },
+      { age: '6' },
+      { age: '7' },
+      { age: '8' },
+      { age: '9' },
+      { age: '10歳以上' },
+    ],
   }),
   computed: {
     user() {

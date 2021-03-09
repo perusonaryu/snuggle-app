@@ -3,8 +3,26 @@
     <h2 class="text-center mb-5">猫を登録</h2>
     <div v-if="catData">
       <v-text-field v-model="catData.name" type="text" label="お名前" outlined></v-text-field>
-      <v-text-field v-model="catData.age" type="text" label="年齢" outlined></v-text-field>
+      <!-- <v-text-field v-model="catData.age" type="text" label="年齢" outlined></v-text-field> -->
+      <v-select
+        :items="ageData"
+        item-text="age"
+        item-value="age"
+        label="年齢"
+        v-model="catData.age"
+        outlined
+        required
+      ></v-select>
       <v-text-field v-model="catData.personality" type="text" label="性格" outlined></v-text-field>
+      <v-select
+        :items="genderData"
+        item-text="name"
+        item-value="name"
+        label="性別"
+        v-model="catData.gender"
+        outlined
+        required
+      ></v-select>
       <v-file-input
         multiple
         label="猫画像"
@@ -37,6 +55,19 @@ export default {
     beforeCatImage: '',
     confirmedImage: '',
     confirmedImageShow: false,
+    genderData: [{ name: 'オス' }, { name: 'メス' }],
+    ageData: [
+      { age: '1' },
+      { age: '2' },
+      { age: '3' },
+      { age: '4' },
+      { age: '5' },
+      { age: '6' },
+      { age: '7' },
+      { age: '8' },
+      { age: '9' },
+      { age: '10歳以上' },
+    ],
   }),
   computed: {
     editCatData() {
@@ -82,8 +113,9 @@ export default {
       updateFormData.append('name', this.catData.name);
       updateFormData.append('age', this.catData.age);
       updateFormData.append('personality', this.catData.personality);
+      updateFormData.append('gender', this.catData.gender);
       updateFormData.append('image', this.catData.image);
-      this.$store.dispatch('cat/catDataUpdate',updateFormData);
+      this.$store.dispatch('cat/catDataUpdate', updateFormData);
     },
   },
 };
