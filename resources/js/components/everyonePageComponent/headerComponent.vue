@@ -9,16 +9,12 @@
       <img src="/storage/nekologo3.png" />
     </router-link>
     <ul>
-      <li v-if="!authCheck">
+      <!-- <li v-if="!authCheck">
         <router-link  :to="{ name: 'userRegister' }">
           新規登録
         </router-link>
-      </li>
-      <li v-if="!authCheck">
-        <router-link  :to="{ name: 'userLogin' }">
-          ログイン
-        </router-link>
-      </li>
+      </li> -->
+
       <li v-if="authCheck">
         <router-link :to="{ name: 'userPage' }">
           マイページ
@@ -48,7 +44,12 @@
           ログアウト
         </a>
       </li>
-      <div v-if="authCheck" >
+      <li v-if="!authCheck" class="login">
+        <router-link :to="{ name: 'userLogin' }">
+          ログイン
+        </router-link>
+      </li>
+      <div v-if="authCheck">
         <span class="user-name">
           {{ user.name }}
         </span>
@@ -109,14 +110,13 @@ ul {
   position: fixed;
   width: 100%;
   z-index: 5;
-  /* opacity: 0.7; */
-  /* background-color: #fdf7f3; */
-  background: rgba(253, 247, 243, 0.7);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .header .logo {
-  width: 200px;
-  height: 60px;
+  margin: 10px 20px;
+  width: 272px;
+  height: 50px;
 }
 
 .header .logo:hover {
@@ -137,21 +137,34 @@ ul {
 
 .header ul li {
   height: 100%;
-  width: 105px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 140px;
 }
 
 .header ul li a {
   color: #333333;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header ul li:hover {
   background-color: #dae2db;
 }
 
-.user-name{
-  font-weight:bold;
+.header .login{
+  background-color: #F6BBA6;
 }
+
+.header .login:hover{
+  background-color: #F6BBA6;
+  opacity: 0.6;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+
 </style>

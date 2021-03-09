@@ -4,7 +4,7 @@
     class="chat-user"
     :to="{
       name: 'chat',
-      params: { chatUserId: chatUserId },
+      params: { chatUserId: chatUserId, userId:userId },
     }"
   >
     <v-list-item-avatar height="70" width="70">
