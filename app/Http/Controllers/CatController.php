@@ -61,6 +61,7 @@ class CatController extends Controller
         $cat->name = $request->name;
         $cat->age = $request->age;
         $cat->personality = $request->personality;
+        $cat->gender = $request->gender;
         if(!is_string($request->image)){
             
 
@@ -104,6 +105,7 @@ class CatController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'age' => ['string','max:255'],
             'personality' => ['required','string'],
+            'gender' => ['required','string'],
             'image' => ['required','image'],
         ]);
     }
@@ -115,6 +117,7 @@ class CatController extends Controller
             'age' => ['string','max:255'],
             'personality' => ['required','string'],
             'image' => ['required'],
+            'gender' => ['required'],
         ]);
     }
 }
