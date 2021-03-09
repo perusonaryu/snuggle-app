@@ -3,7 +3,6 @@
     <h2 class="text-center mb-5">猫を登録</h2>
     <div v-if="catData">
       <v-text-field v-model="catData.name" type="text" label="お名前" outlined></v-text-field>
-      <!-- <v-text-field v-model="catData.age" type="text" label="年齢" outlined></v-text-field> -->
       <v-select
         :items="ageData"
         item-text="age"
