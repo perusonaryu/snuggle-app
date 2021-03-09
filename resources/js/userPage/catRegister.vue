@@ -4,7 +4,15 @@
     <v-text-field v-model="form.name" type="text" label="お名前" outlined></v-text-field>
     <v-text-field v-model="form.age" type="text" label="年齢" outlined></v-text-field>
     <v-text-field v-model="form.personality" type="text" label="性格" outlined></v-text-field>
-    <v-text-field v-model="form.gender" type="text" label="性別" outlined></v-text-field>
+    <v-select
+      :items="genderData"
+      item-text="name"
+      item-value="name"
+      label="性別"
+      v-model="form.gender"
+      outlined
+      required
+    ></v-select>
     <v-file-input
       multiple
       label="猫画像"
@@ -36,6 +44,10 @@ export default {
     },
     userData: '',
     confirmedImage: '',
+    genderData:[
+      { "name":"オス"  },
+      { "name":"メス"  }
+    ]
   }),
   computed: {
     user() {
