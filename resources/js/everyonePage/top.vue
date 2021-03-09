@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="top-image">
-      <img src="/storage/cat-top-image.jpg" alt="" />
+      <img src="/storage/cat-top-image.png" alt="" />
+      <p class="register-btn">
+      <router-link  :to="{ name: 'userRegister' }" >
+          新規登録の方はこちら
+        </router-link>
+      </p>
     </div>
 
     <v-container>
@@ -35,23 +40,37 @@ export default {
 <style scoped>
 .top-image {
   width: 100%;
-  height: 500px;
   position: relative;
 }
 
 .top-image img {
-  background-size: cover;
   object-fit: cover;
   width: 100%;
-  height: 100%;
+  height: 730px;
 }
 
-.top-image form {
+.register-btn{
+  width: 280px;
+  height: 70px;
+  background-color: #F6BBA6;
   position: absolute;
-  top: 50%;
-  left: 25%;
-  width: 50%;
+  top:25%;
+  right: 5%;
 }
+
+.register-btn a{
+  color:white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-btn:hover{
+  opacity: 0.8;
+}
+
 </style>
 
 <style></style>

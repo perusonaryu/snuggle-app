@@ -90,7 +90,7 @@ const routes = [
   
   //チャット画面
   {
-    path:'/chat:chatUserId',
+    path:'/chat:chatUserId:userId',
     component:chat,
     name:'chat',
   },

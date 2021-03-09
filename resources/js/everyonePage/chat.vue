@@ -47,12 +47,12 @@ export default {
     } else {
       this.$store.dispatch('auth/fetchUser');
     }
+    this.messageReceive();
     this.chatUserGet(this.$route.params.chatUserId);
   },
   watch: {
     user: function(userData, undefind) {
       this.messageDataGet(userData.id, this.$route.params.chatUserId);
-      this.messageReceive();
     },
   },
   filters: {
@@ -91,7 +91,7 @@ export default {
       const token = this.$store.getters['auth/token'];
       Echo.options.auth.headers['Authorization'] = `Bearer ${token}`;
 
-      Echo.private('message.' + this.user.id).listen('.message-sent', e => {
+      Echo.private('message.' + this.$route.params.userId).listen('.message-sent', e => {
         this.messageList.push({
           message: e.message,
           send_user: e.send_user,
