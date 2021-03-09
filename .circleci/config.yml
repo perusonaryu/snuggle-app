@@ -50,8 +50,7 @@ jobs:
           name: deploy
           command: |
             ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd snuggle-app && \
-              git fetch origin main && \
-              git reset --hard origin/main && \
+              git pull origin main && \
               composer install -n --no-dev --prefer-dist && \
               npm ci && \
               npm run prod && \
