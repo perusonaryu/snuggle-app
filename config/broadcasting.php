@@ -38,7 +38,6 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
-                'scheme' => env('PUSHER_APP_SCHEME')
             ],
         ],
 
