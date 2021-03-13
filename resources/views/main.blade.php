@@ -31,7 +31,7 @@
                 <div class="content">
                     <router-view />
                 </div>
-
+                <footer-component />
             </v-app>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
