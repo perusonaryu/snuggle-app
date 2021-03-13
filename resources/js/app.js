@@ -35,6 +35,7 @@ Vue.use(VeeValidate);
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('my-cats-list', require('./components/myPageComponent/myCatsList.vue').default);
 Vue.component('header-component', require('./components/everyonePageComponent/headerComponent.vue').default);
+Vue.component('footer-component', require('./components/everyonePageComponent/footerComponent.vue').default);
 Vue.component('all-cat-list', require('./components/everyonePageComponent/allCatList.vue').default);
 Vue.component('like-check', require('./components/everyonePageComponent/likeCheck.vue').default);
 Vue.component('chat-list', require('./components/everyonePageComponent/chatListComponent.vue').default);
