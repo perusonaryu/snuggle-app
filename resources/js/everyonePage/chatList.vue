@@ -1,16 +1,28 @@
 <template>
   <v-container class="chat-user-list">
-    <v-card class="mx-auto" max-width="500" tile>
-      <v-list>
-        <v-subheader>トークリスト</v-subheader>
-        <v-list-item-group color="primary">
-          <v-list-item v-for="(chat,i) in chatList" :key="i">
-            <chat-list v-if="user.id != chat.user_id_1" :userId="user.id" :chatUserId="chat.user_id_1"></chat-list>
-            <chat-list v-else-if="user.id != chat.user_id_2" :userId="user.id" :chatUserId="chat.user_id_2"></chat-list>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-card>
+    <v-row justify="center">
+      <v-col md="8" cols="12">
+        <v-card class="mx-auto" tile>
+          <v-list>
+            <v-subheader>トークリスト</v-subheader>
+            <v-list-item-group color="primary">
+              <v-list-item v-for="(chat, i) in chatList" :key="i">
+                <chat-list
+                  v-if="user.id != chat.user_id_1"
+                  :userId="user.id"
+                  :chatUserId="chat.user_id_1"
+                ></chat-list>
+                <chat-list
+                  v-else-if="user.id != chat.user_id_2"
+                  :userId="user.id"
+                  :chatUserId="chat.user_id_2"
+                ></chat-list>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -153,7 +153,7 @@ export default {
 <style scoped>
 .register-form {
   max-width: 500px;
-  margin: 100px auto 0;
+  margin: 100px auto ;
   border: 1px solid #73a776;
   border-radius: 10px;
   padding: 30px;

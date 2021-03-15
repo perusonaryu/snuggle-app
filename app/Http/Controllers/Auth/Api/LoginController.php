@@ -73,12 +73,6 @@ class LoginController extends Controller
         // tokenの削除
         $user->tokens()->delete();
 
-        // このユーザーの現在のトークンを取り消す
-        // $user->currentAccessToken()->delete();
-
-        // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
-        // $user->tokens()->where('id', $user->$id)->delete();
-
         return response()->json(['message' => 'logouted']);
     }
 }

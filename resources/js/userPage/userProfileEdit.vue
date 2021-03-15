@@ -1,6 +1,6 @@
 <template>
   <v-container class="profile-edit" v-if="userData">
-    <v-text-field v-model="userData.name" type="text" label="name" outlined></v-text-field>
+    <v-text-field v-model="userData.name" type="text" label="お名前" outlined></v-text-field>
 
     <v-textarea outlined label="自己紹介文" auto-grow v-model="userData.introduction"></v-textarea>
     <v-select
@@ -21,7 +21,7 @@
     ></v-file-input>
 
     <p>
-      <img
+      <v-img
         v-if="!confirmedImageShow"
         :src="`/storage/userImages/${beforeUserImage}`"
         height="200"
@@ -71,7 +71,6 @@ export default {
   methods: {
     update() {
       let updateFormData = new FormData();
-      console.log(this.userData.name);
       updateFormData.append('id', this.userData.id);
       updateFormData.append('name', this.userData.name);
       updateFormData.append('region', this.userData.region);

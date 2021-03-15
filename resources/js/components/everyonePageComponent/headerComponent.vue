@@ -9,12 +9,6 @@
       <img src="/storage/nekologo3.png" />
     </router-link>
     <ul>
-      <!-- <li v-if="!authCheck">
-        <router-link  :to="{ name: 'userRegister' }">
-          新規登録
-        </router-link>
-      </li> -->
-
       <li v-if="authCheck">
         <router-link :to="{ name: 'userPage' }">
           マイページ
@@ -81,7 +75,7 @@ export default {
   },
   watch: {
     user: function(userData, undefind) {
-      if (userData) {
+      if (userData && userData != 'null') {
         this.authCheck = true;
       } else {
         this.authCheck = false;
@@ -90,9 +84,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('auth/logout').then(() => {
-        if (this.$route.path != '/') this.$router.push({ name: 'topPage' });
-      });
+      this.$store.dispatch('auth/logout');
     },
   },
 };
@@ -115,7 +107,7 @@ ul {
 
 .header .logo {
   margin: 10px 20px;
-  width: 272px;
+  width: 270px;
   height: 50px;
 }
 

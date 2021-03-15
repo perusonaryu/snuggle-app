@@ -3,55 +3,52 @@
     <h2>猫を探す</h2>
 
     <p class="error-text" v-if="error">文字を入力してください！</p>
-    <form class="form-inline d-flex justify-center">
-      <input
-        class="form-control mr-sm-2 "
-        type="search"
-        placeholder="地域で検索 例:沖縄"
-        aria-label="Search"
-        v-model="searchWord"
-      />
-      <v-btn @click="search">検索</v-btn>
-    </form>
-    <v-row justify="center" v-if="catsSearchedData">
-      <v-col cols="12" md="6" lg="6" v-for="catData in catsSearchedData" :key="catData.name">
-        <v-card class="mx-auto" width="100%" outlined>
-          <v-list-item three-line>
-            <router-link
-              :to="{
-                name: 'catDetail',
-                params: { catId: catData.id },
-              }"
-            >
-              <v-list-item-avatar rounded="50%" size="150">
-                <v-img :src="`/storage/catImages/${catData.image}`"></v-img>
-              </v-list-item-avatar>
-            </router-link>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">
-                {{ catData.name }}
-              </v-list-item-title>
-              <v-list-item-subtitle> {{ catData.age }}さい </v-list-item-subtitle>
-              <v-list-item-subtitle> 性格：{{ catData.personality }} </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+    <v-select
+      :items="prefectures"
+      item-text="name"
+      item-value="name"
+      label="地域で検索"
+      v-model="searchWord"
+      outlined
+      @change="search"
+    ></v-select>
 
-          <v-card-actions>
-            <like-check class="check-btn" :catId="catData.id" :userId="user.id" />
-          </v-card-actions>
-        </v-card>
+    <v-row v-if="catsSearchedData" class="content">
+      <v-col
+        cols="12"
+        md="4"
+        lg="4"
+        v-for="catData in catsSearchedData"
+        :key="catData.name"
+        class="cat-detail"
+      >
+        <v-img :src="`/storage/catImages/${catData.image}`" class="cat-image">
+          <router-link
+            :to="{
+              name: 'catDetail',
+              params: { catId: catData.id },
+            }"
+          >
+          </router-link>
+        </v-img>
+        <div class="cat-content">
+          <p class="text-center cat-name">{{ catData.name }}</p>
+          <like-check class="check-btn" :catId="catData.id" :userId="userId" />
+        </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import prefectureData from '../prefectureData.json';
 export default {
   data: () => ({
     catsData: '',
     userId: '',
     searchWord: '',
-    error:false
+    error: false,
+    prefectures: [],
   }),
 
   computed: {
@@ -66,7 +63,7 @@ export default {
     },
   },
   mounted() {
-    // this.search();
+    this.prefectures = prefectureData;
     this.allCatsDataGet();
     const token = this.$store.getters['auth/token'];
     if (token && token != 'null') {
@@ -85,30 +82,85 @@ export default {
       this.$store.dispatch('cat/allCatsData');
     },
     search() {
-        if(this.searchWord){
-            axios
-              .get('api/search', { params: this.searchWord })
-              .then(result => {
-                this.catsData = result.data.searchedCatsData;
-                this.error = false;
-              })
-              .catch(error => {
-                console.log(error);
-              });
-        }else{
-            this.error = true;
-        }
+      if (this.searchWord == '全て') {
+        axios
+          .get('api/search', { params: '' })
+          .then(result => {
+            this.catsData = result.data.searchedCatsData;
+            this.error = false;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else if (this.searchWord) {
+        axios
+          .get('api/search', { params: this.searchWord })
+          .then(result => {
+            this.catsData = result.data.searchedCatsData;
+            this.error = false;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        this.error = true;
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-.wrap{
-  margin-top: 100px;
+.wrap {
+  margin-top: 60px;
 }
 
-.error-text{
-    color:red;
+.content {
+  margin: 20px 0;
+}
+
+.error-text {
+  color: red;
+}
+
+.cat-detail a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.cat-detail .cat-name {
+  margin-top: 16px;
+}
+
+.cat-image {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.cat-image:hover {
+  opacity: 0.8;
+}
+
+.cat-content {
+  width: 270px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.check-btn {
+  left: 0;
+  bottom: -8px;
+  position: absolute;
+}
+</style>
+
+<style>
+.v-select__slot .v-label {
+  top: auto;
+  margin: 0;
 }
 </style>
