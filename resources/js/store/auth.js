@@ -59,6 +59,7 @@ const actions = {
             console.log(result.data);
             context.commit("resetUser", null);
             context.commit("setToken", null);
+            if (router.path != '/') router.push({ name: 'topPage' });
             
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);

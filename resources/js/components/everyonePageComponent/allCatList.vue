@@ -79,7 +79,6 @@ export default {
 }
 
 .check-btn {
-  z-index: 5;
   left: 0;
   bottom: -8px;
   position: absolute;

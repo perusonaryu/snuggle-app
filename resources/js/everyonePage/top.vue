@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <div class="top-image">
       <img src="/storage/cat-top-image.png" alt="" />
       <p class="register-btn">
@@ -32,9 +32,7 @@
 
 <script>
 export default {
-  data: () => ({
-    searchWord: '',
-  }),
+  data: () => ({}),
   computed: {
     userData() {
       return this.$store.getters['auth/user'];
@@ -51,6 +49,10 @@ export default {
 </script>
 
 <style scoped>
+.wrap{
+  margin: 0 0 50px;
+}
+
 .top-image {
   width: 100%;
   position: relative;

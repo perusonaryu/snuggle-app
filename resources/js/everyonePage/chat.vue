@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="chat">
+    <div class="chat" v-if="user">
       <div class="message-list">
         <h4 v-if="chatUserData">{{ chatUserData.name }}さん</h4>
         <div v-for="messageData in messageList" :key="messageData.id">
@@ -20,8 +20,12 @@
         </div>
       </div>
 
-      <v-text-field v-model="message" solo label="メッセージ" clearable></v-text-field>
-      <v-btn @click="send">送信</v-btn>
+      <p v-if="messageError" class="error-message">メッセージを入力してください！</p>
+      <div class="d-flex">
+        <v-text-field v-model="message" solo label="メッセージ" clearable></v-text-field>
+        <v-btn @click="send" color="#E2E0CB" height="48">送信</v-btn>
+      </div>
+      
     </div>
   </v-container>
 </template>
@@ -31,6 +35,7 @@ import moment from 'moment';
 export default {
   data: () => ({
     message: '',
+    messageError:false,
     messageList: '',
   }),
   computed: {
@@ -62,22 +67,28 @@ export default {
   },
   methods: {
     send() {
-      axios
-        .post('api/send', {
-          sendId: this.user.id,
-          receiveId: this.$route.params.chatUserId,
-          message: this.message,
-        })
-        .then(result => {
-          this.messageList.push({
+      if(this.message){
+        this.messageError = false;
+        axios
+          .post('api/send', {
+            sendId: this.user.id,
+            receiveId: this.$route.params.chatUserId,
             message: this.message,
-            send_user: this.user.id,
+          })
+          .then(result => {
+            this.messageList.push({
+              message: this.message,
+              send_user: this.user.id,
+            });
+            this.message = '';
+          })
+          .catch(error => {
+            console.log(error);
           });
-          this.message = '';
-        })
-        .catch(error => {
-          console.log(error);
-        });
+
+      }else{
+        this.messageError = true;
+      }
     },
     chatUserGet(chatUserId) {
       this.$store.dispatch('cat/postedUserDetail', chatUserId);
@@ -109,7 +120,7 @@ p {
 
 .chat {
   max-width: 500px;
-  margin: 100px auto 0;
+  margin: 100px auto 100px;
 }
 
 .message {
@@ -133,5 +144,10 @@ p {
 .chat-user-name,
 .datetime {
   font-size: 10px;
+}
+
+.error-message{
+  color:red;
+  font-size:12px;
 }
 </style>

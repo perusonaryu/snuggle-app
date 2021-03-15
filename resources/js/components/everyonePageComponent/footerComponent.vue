@@ -13,12 +13,14 @@ export default {};
 
 <style scoped>
 .footer {
-  height: 190px;
+  width: 100%;
+  padding: 5px 0;
   background-color: #f6bba6;
+  position:absolute;
+  bottom:0;
 }
 
 .logo {
-  padding-top: 64px;
   display: flex;
   justify-content: center;
 }
@@ -28,8 +30,8 @@ export default {};
   height: 50px;
 }
 
-.copyright{
-    padding-top:45px;
-    font-size:12px;
+.copyright {
+  margin: 0;
+  font-size: 12px;
 }
 </style>

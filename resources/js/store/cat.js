@@ -50,6 +50,7 @@ const actions = {
         }})
         .then( (result) => {
             console.log('猫を登録しました!');
+            alert('猫を登録しました！')
         })
         .catch( (error) => {
             console.log(error);

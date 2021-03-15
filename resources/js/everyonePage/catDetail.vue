@@ -1,40 +1,86 @@
 <template>
-  <v-container>
+  <v-container class="wrap">
     <v-row justify="center" align="center">
-      <v-col class="image" md="7" cols="12" v-if="catId == this.catDetail.id">
-        <h2>{{ catDetail.name }}</h2>
+      <v-col class="image" md="6" cols="12" v-if="catId == this.catDetail.id">
+        <h2 class="text-center">{{ catDetail.name }}</h2>
         <img :src="`/storage/catImages/${catDetail.image}`" />
       </v-col>
-      <v-col md="7" cols="12">
-        <table>
-          <tr>
-            <th>性別</th>
-            <td class="w-25">おす</td>
-            <th>年齢</th>
-            <td class="w-25">{{ catDetail.age }}歳</td>
-          </tr>
-          <tr>
-            <th>特徴</th>
-            <td colspan="3">{{ catDetail.personality }}</td>
-          </tr>
-        </table>
-      </v-col>
-      <v-col md="4" cols="12" v-if="catPostedUserData">
-        <h4>掲載者</h4>
-        <div class="user_information">
-          <p>掲載者： {{ catPostedUserData.name }}</p>
-          <p>所在県： {{ catPostedUserData.region }}</p>
-          <p>自己紹介など： {{ catPostedUserData.introduction }}</p>
+      <v-col md="9" cols="12" class="cat-detail">
+        <dl>
+          <dt>掲載者のお名前</dt>
+          <dd> {{ catPostedUserData.name }} </dd>
+          <dt>現在所在地</dt>
+          <dd>{{ catPostedUserData.region }}</dd>
+          <hr />
+          <dt>性別</dt>
+          <dd>{{ catDetail.gender }}</dd>
+          <dt>年齢</dt>
+          <dd>{{ catDetail.age }}歳</dd>
+          <hr>
+          <dt>去勢</dt>
+          <dd>している</dd>
+          <dt>ワクチン</dt>
+          <dd>接種済み</dd>
+
+          <hr />
+        </dl>
+        <div class="content-wrap">
+          <div class="detail-title">募集経緯</div>
+          <p>
+            子猫がひとりぼっちでいるところを見てしまったえさやりさんが
+            しばらくは餌もやらず見守っていたそうですが こんなに小さい子が 回りに親も兄弟もおらず
+            がんばっているのに居てもたってもいれず ついに餌をあげてしまったとのことです。
+            餌をあげたからには 責任を持ちたいけれど
+            自宅にはどうにもこうにも迎えることができないのでどうしたらよいかと相談をうけました。
+          </p>
         </div>
-        <router-link
-          v-if="catDetail"
-          :to="{
-            name: 'chat',
-            params: { chatUserId: catDetail.user_id },
-          }"
-        >
-          <v-btn text>連絡をする</v-btn>
-        </router-link>
+        <hr />
+        <div class="content-wrap">
+          <div class="detail-title">性格・特徴</div>
+          <p>
+            {{ catDetail.personality }}
+          </p>
+        </div>
+        <hr>
+        <div class="chat-btn">
+          <router-link
+            v-if="catDetail"
+            :to="{
+              name: 'chat',
+              params: { chatUserId: catDetail.user_id,userId:user.id },
+            }"
+          >
+            <v-btn color="#F6BBA6" width="250" height="50">里親を申し出る・質問をする</v-btn>
+          </router-link>
+        </div>
+        <!-- <v-row class="cat-detail">
+          <v-col class="" md="4" cols="12"> </v-col>
+          <v-col md="8" cols="12">
+            <dl>
+              <dt>現在所在地</dt>
+              <dd>{{ catPostedUserData.region }}</dd>
+              <dt>雌雄</dt>
+              <dd>{{ catDetail.gender }}</dd>
+              <dt>現在所在地</dt>
+              <dd>{{ catPostedUserData.region }}</dd>
+            </dl>
+            <h4>掲載者</h4>
+            <div class="user_information">
+              <p>掲載者： {{ catPostedUserData.name }}</p>
+              <p>所在県： {{ catPostedUserData.region }}</p>
+              <p>自己紹介など： {{ catPostedUserData.introduction }}</p>
+            </div>
+            <router-link
+              v-if="catDetail"
+              :to="{
+                name: 'chat',
+                params: { chatUserId: catDetail.user_id },
+              }"
+            >
+              <v-btn text>連絡をする</v-btn>
+            </router-link>
+          </v-col>
+        </v-row> -->
       </v-col>
     </v-row>
   </v-container>
@@ -53,6 +99,9 @@ export default {
     catPostedUserData() {
       return this.$store.getters['cat/postedUserData'];
     },
+    user(){
+      return this.$store.getters['auth/user'];
+    }
   },
   mounted() {
     this.catDatailGet();
@@ -75,41 +124,70 @@ export default {
 </script>
 
 <style scoped>
+.wrap {
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+
 .image img {
   background-size: cover;
   background-position: center;
   width: 100%;
+  border-radius: 10px;
 }
 
-table {
+.cat-detail {
+  border: 1px solid #e2e0cb;
+  padding: 0;
+}
+
+hr {
+  margin: 0;
+}
+
+dl {
   width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border: 1px solid gray;
+  margin: 0;
 }
 
-table th,
-table td {
-  padding: 10px 0;
-  text-align: center;
-}
-
-table th {
-  background-color: yellow;
+dl dt {
   width: 20%;
+  padding: 15px 0 15px 20px;
 }
 
-table tr + tr {
-  border-top: 1px solid gray;
+dl dd {
+  width: 29%;
+  padding: 15px 20px;
+  margin: 0;
 }
 
-.w-25 {
-  width: 25%;
+dl dt,
+dl dd {
+  display: inline-block;
 }
 
-.user_information {
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 10px;
+.detail-title {
+  font-size: 14px;
+  font-weight: bold;
+  width: 10%;
 }
+
+.content-wrap {
+  padding: 20px;
+  display: flex;
+}
+
+.content-wrap p {
+  padding-left: 50px;
+  margin: 0;
+  width: 80%;
+}
+
+.chat-btn{
+  padding:20px;
+  display: flex;
+  justify-content: center;
+}
+
+
 </style>
