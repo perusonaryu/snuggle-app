@@ -11,6 +11,7 @@ $factory->define(Cat::class, function (Faker $faker) {
         'age' => '7',
         'image' => 'sample.jpg',
         'personality' => 'おとなしい',
+        'background' => 'testtesttesttesttesttest',
         'gender' => 'オス',
         'user_id' => 1,
     ];

@@ -47,7 +47,8 @@ Route::get('posted/user/detail/{id}','UserController@detail');
 Route::get('cats/data','CatController@get');
 Route::get('cat/detail/{id}','CatController@detail');
 
-
+//お気に入り猫情報取得
+Route::get('favorite/cats/{id}','CatController@favoriteCatsGet');
 
 //お気に入り
 Route::post('cats/like/check','LikeController@check');

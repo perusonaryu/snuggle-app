@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Cat;
+use App\Like;
 use Illuminate\Support\Facades\Storage;
 
 class CatController extends Controller
@@ -22,6 +23,7 @@ class CatController extends Controller
                 'name' => $request->name,
                 'age' => $request->age,
                 'personality' => $request->personality,
+                'background' => $request->background,
                 'gender' => $request->gender,
                 'image' => $file_name,
                 'user_id' => $request->userId,
@@ -45,7 +47,6 @@ class CatController extends Controller
     public function catslistget($id){
         $mycatslist = Cat::where('user_id',$id)->get();
 
-        // dd($mycatslist);
         return json_encode(['myCatsList' => $mycatslist]);
     }
 
@@ -61,6 +62,7 @@ class CatController extends Controller
         $cat->name = $request->name;
         $cat->age = $request->age;
         $cat->personality = $request->personality;
+        $cat->background = $request->background;
         $cat->gender = $request->gender;
         if(!is_string($request->image)){
             
@@ -84,8 +86,16 @@ class CatController extends Controller
     public function search(Request $request){
         $searched_cats_data = Cat::select('cats.*')->join('users','cats.user_id', '=','users.id')->where('region','like', '%'.$request[0].'%')->get();
 
+
         return json_encode(['searchedCatsData' => $searched_cats_data]);
         dd($search_cats_data);
+    }
+
+    //お気に入りの猫だけを取得
+    public function favoriteCatsGet($id){
+        $favolit_cats = Cat::select('cats.*')->join('likes','cats.id', '=' , 'likes.cat_id')->where('likes.user_id',$id)->get();
+        // dd($favolit_cats);
+        return json_encode(['favolitCatsData' => $favolit_cats]);
     }
 
     //猫削除
@@ -105,6 +115,7 @@ class CatController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'age' => ['string','max:255'],
             'personality' => ['required','string'],
+            'background' => ['required','string'],
             'gender' => ['required','string'],
             'image' => ['required','image'],
         ]);
@@ -116,6 +127,7 @@ class CatController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'age' => ['string','max:255'],
             'personality' => ['required','string'],
+            'background' => ['required','string'],
             'image' => ['required'],
             'gender' => ['required'],
         ]);

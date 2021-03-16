@@ -29,6 +29,7 @@ class CatTest extends TestCase
             'age' => '10',
             'gender' => 'おす',
             'personality' => 'おとなしい',
+            'background' => 'testtestetstestestestest',
             'image' => $dummyImage,
             'userId' => $user->id,
         ];
@@ -65,6 +66,7 @@ class CatTest extends TestCase
             'age' => '10',
             'gender' => 'おす',
             'personality' => 'おとなしい',
+            'background' => 'testtestetstestestestest',
             'image' => 'test.jpg',
         ];
 

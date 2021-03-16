@@ -20,13 +20,23 @@
         outlined
         required
       ></v-select>
-      <v-text-field
-        v-model="form.personality"
-        type="text"
+      <v-textarea
+        counter
+        label="募集経緯"
+        :rules="backgroundRules"
+        v-model="form.background"
+        outlined
+        hint="例:家で買い続けることが出来なくなったため..."
+      ></v-textarea>
+      <v-textarea
+        counter
         label="性格・特徴"
         :rules="personalityRules"
+        v-model="form.personality"
         outlined
-      ></v-text-field>
+        hint="例:撫でる事も出来て、大人しいです。"
+      ></v-textarea>
+
       <v-select
         :items="genderData"
         item-text="name"
@@ -51,9 +61,11 @@
       <img :src="confirmedImage" class="img" />
     </p>
 
-    <v-btn @click="catRegister">
-      登録
-    </v-btn>
+    <div class="btn-wrap">
+      <v-btn class="save-btn" @click="catRegister" color="#F6BBA6" width="250" height="50">
+        保存
+      </v-btn>
+    </div>
   </v-container>
 </template>
 
@@ -65,6 +77,7 @@ export default {
       age: '',
       personality: '',
       gender: '',
+      background: '',
       image: '',
       userId: '',
     },
@@ -85,7 +98,14 @@ export default {
     ],
     nameRules: [v => !!v || 'お名前を入力してください。'],
     ageRules: [v => !!v || '年齢を入力してください。'],
-    personalityRules: [v => !!v || '性格・特徴を入力してください。'],
+    personalityRules: [
+      v => !!v || '性格・特徴を入力してください。',
+      v => v.length <= 250 || ' 250文字までです。 ',
+    ],
+    backgroundRules: [
+      v => !!v || '募集経緯を入力してください。',
+      v => v.length <= 250 || ' 250文字までです。 ',
+    ],
     genderRules: [v => !!v || '性別を入力してください。'],
     imageRules: [v => !!v || '画像を選択してください。'],
   }),
@@ -115,10 +135,11 @@ export default {
         formData.append('name', this.form.name);
         formData.append('age', this.form.age);
         formData.append('personality', this.form.personality);
+        formData.append('background', this.form.background);
         formData.append('image', this.form.image);
         formData.append('gender', this.form.gender);
         formData.append('userId', this.form.userId);
-  
+
         this.$store.dispatch('cat/register', formData);
       }
     },
@@ -153,7 +174,8 @@ export default {
 </style>
 
 <style>
-.v-messages__message{
-  color: red;
-}  
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+}
 </style>

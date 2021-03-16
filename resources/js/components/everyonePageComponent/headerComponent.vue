@@ -8,22 +8,7 @@
     >
       <img src="/storage/nekologo3.png" />
     </router-link>
-    <ul>
-      <li v-if="authCheck">
-        <router-link :to="{ name: 'userPage' }">
-          マイページ
-        </router-link>
-      </li>
-      <li v-if="authCheck">
-        <router-link :to="{ name: 'catRegister' }">
-          猫登録
-        </router-link>
-      </li>
-      <li v-if="authCheck">
-        <router-link :to="{ name: 'chatList' }">
-          チャットリスト
-        </router-link>
-      </li>
+    <ul >
       <li>
         <router-link
           :to="{
@@ -33,22 +18,67 @@
           猫を探す
         </router-link>
       </li>
-      <li v-if="authCheck">
-        <a @click="logout">
-          ログアウト
-        </a>
-      </li>
-      <li v-if="!authCheck" class="login">
+      <li v-if="!authCheck"  class="login">
         <router-link :to="{ name: 'userLogin' }">
           ログイン
         </router-link>
       </li>
-      <div v-if="authCheck">
-        <span class="user-name">
-          {{ user.name }}
-        </span>
-        さん
-      </div>
+      <v-menu v-if="authCheck">
+        <template v-slot:activator="{ attrs, on }">
+          <v-btn
+            height="70"
+            width="120"
+            tile
+            depressed
+            color="#f6bba6"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-img
+              class="user-image"
+              height="50"
+              width="50"
+              :src="`/storage/userImages/${user.image}`"
+            >
+            </v-img>
+            <v-icon right dark>
+              mdi-chevron-down
+            </v-icon>
+          </v-btn>
+        </template>
+
+        <v-list width="200" color="#E2E0CB">
+          <v-list-item class="list-item">
+            <router-link :to="{ name: 'userPage' }">
+              マイページ
+            </router-link>
+          </v-list-item>
+          <v-list-item class="list-item">
+            <router-link :to="{ name: 'catRegister' }">
+              猫登録
+            </router-link>
+          </v-list-item>
+          <v-list-item class="list-item">
+            <router-link :to="{ 
+              name: 'catFavorite',
+              params: { userId:user.id },
+            }">
+              お気に入り猫
+            </router-link>
+          </v-list-item>
+          
+          <v-list-item class="list-item">
+            <router-link :to="{ name: 'chatList' }">
+              チャットリスト
+            </router-link>
+          </v-list-item>
+          <v-list-item class="list-item">
+            <a @click="logout">
+              ログアウト
+            </a>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </ul>
   </div>
 </template>
@@ -91,6 +121,10 @@ export default {
 </script>
 
 <style scoped>
+a{
+  color: black;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -145,18 +179,38 @@ ul {
   background-color: #dae2db;
 }
 
-.header .login{
-  background-color: #F6BBA6;
+.header .login {
+  background-color: #f6bba6;
 }
 
-.header .login:hover{
-  background-color: #F6BBA6;
+.header .login:hover {
+  background-color: #f6bba6;
   opacity: 0.6;
 }
 
-.user-name {
-  font-weight: bold;
+
+
+.user-image {
+  border-radius: 50%;
 }
 
+.list-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.list-item a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 200px;
+  height: 48px;
+}
+
+.list-item:hover {
+  background: white;
+  opacity: 0.7;
+}
 </style>
