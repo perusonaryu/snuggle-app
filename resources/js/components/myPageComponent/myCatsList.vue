@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col v-for="catData in myCats" :key="catData.name" md="4">
+    <v-col v-for="catData in myCats" :key="catData.name" md="6">
       <v-card class="mx-auto" max-width="400" outlined>
         <v-list-item three-line>
           <v-list-item-avatar rounded="50%" size="100">

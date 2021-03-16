@@ -113,6 +113,7 @@ export default {
 <style scoped>
 .wrap {
   margin-top: 60px;
+  margin-bottom: 100px;
 }
 
 .content {

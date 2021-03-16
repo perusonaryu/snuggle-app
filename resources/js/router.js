@@ -16,6 +16,7 @@ import catDetail from './everyonePage/catDetail.vue'
 import chat from './everyonePage/chat.vue'
 import chatList from './everyonePage/chatList.vue'
 import catSearched from './everyonePage/catSearched.vue'
+import catFavorite from './everyonePage/catFavorite.vue'
 
 
 
@@ -100,6 +101,12 @@ const routes = [
     path:'/catSearched',
     component:catSearched,
     name:'catSearched',
+  },
+  //お気に入り猫画面
+  {
+    path:'/catFavorite:userId',
+    component:catFavorite,
+    name:'catFavorite',
   }
 ]
 

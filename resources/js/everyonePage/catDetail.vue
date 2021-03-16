@@ -16,30 +16,21 @@
           <dd>{{ catDetail.gender }}</dd>
           <dt>年齢</dt>
           <dd>{{ catDetail.age }}歳</dd>
-          <hr>
-          <dt>去勢</dt>
+          <!-- <dt>去勢</dt>
           <dd>している</dd>
           <dt>ワクチン</dt>
-          <dd>接種済み</dd>
+          <dd>接種済み</dd> -->
 
           <hr />
         </dl>
         <div class="content-wrap">
           <div class="detail-title">募集経緯</div>
-          <p>
-            子猫がひとりぼっちでいるところを見てしまったえさやりさんが
-            しばらくは餌もやらず見守っていたそうですが こんなに小さい子が 回りに親も兄弟もおらず
-            がんばっているのに居てもたってもいれず ついに餌をあげてしまったとのことです。
-            餌をあげたからには 責任を持ちたいけれど
-            自宅にはどうにもこうにも迎えることができないのでどうしたらよいかと相談をうけました。
-          </p>
+          <p>{{ catDetail.background }}</p>
         </div>
         <hr />
         <div class="content-wrap">
           <div class="detail-title">性格・特徴</div>
-          <p>
-            {{ catDetail.personality }}
-          </p>
+          <p>{{ catDetail.personality }}</p>
         </div>
         <hr>
         <div class="chat-btn">
@@ -53,34 +44,7 @@
             <v-btn color="#F6BBA6" width="250" height="50">里親を申し出る・質問をする</v-btn>
           </router-link>
         </div>
-        <!-- <v-row class="cat-detail">
-          <v-col class="" md="4" cols="12"> </v-col>
-          <v-col md="8" cols="12">
-            <dl>
-              <dt>現在所在地</dt>
-              <dd>{{ catPostedUserData.region }}</dd>
-              <dt>雌雄</dt>
-              <dd>{{ catDetail.gender }}</dd>
-              <dt>現在所在地</dt>
-              <dd>{{ catPostedUserData.region }}</dd>
-            </dl>
-            <h4>掲載者</h4>
-            <div class="user_information">
-              <p>掲載者： {{ catPostedUserData.name }}</p>
-              <p>所在県： {{ catPostedUserData.region }}</p>
-              <p>自己紹介など： {{ catPostedUserData.introduction }}</p>
-            </div>
-            <router-link
-              v-if="catDetail"
-              :to="{
-                name: 'chat',
-                params: { chatUserId: catDetail.user_id },
-              }"
-            >
-              <v-btn text>連絡をする</v-btn>
-            </router-link>
-          </v-col>
-        </v-row> -->
+        
       </v-col>
     </v-row>
   </v-container>
@@ -181,6 +145,7 @@ dl dd {
   padding-left: 50px;
   margin: 0;
   width: 80%;
+  white-space: pre !important;
 }
 
 .chat-btn{

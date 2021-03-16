@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cat extends Model
 {
     protected $fillable = [
-        'id','name','age','color','image','personality','user_id','gender'
+        'id','name','age','color','image','personality','user_id','gender','background',
     ];
 
     protected $table = 'cats';

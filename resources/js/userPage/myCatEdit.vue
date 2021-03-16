@@ -1,23 +1,44 @@
 <template>
-  <v-container>
-    <h2 class="text-center mb-5">猫を登録</h2>
+  <v-container class="wrap">
+    <h2 class="text-center mb-5">🐈猫の編集🐈</h2>
     <div v-if="catData">
-      <v-text-field v-model="catData.name" type="text" label="お名前" outlined></v-text-field>
+      <v-text-field
+        v-model="catData.name"
+        type="text"
+        label="お名前"
+        :rules="nameRules"
+        outlined
+      ></v-text-field>
       <v-select
         :items="ageData"
         item-text="age"
         item-value="age"
         label="年齢"
+        :rules="ageRules"
         v-model="catData.age"
         outlined
         required
       ></v-select>
-      <v-text-field v-model="catData.personality" type="text" label="性格" outlined></v-text-field>
+      <v-textarea
+        counter
+        label="募集経緯"
+        :rules="backgroundRules"
+        v-model="catData.background"
+        outlined
+      ></v-textarea>
+      <v-textarea
+        counter
+        label="性格・特徴"
+        :rules="personalityRules"
+        v-model="catData.personality"
+        outlined
+      ></v-textarea>
       <v-select
         :items="genderData"
         item-text="name"
         item-value="name"
         label="性別"
+        :rules="genderRules"
         v-model="catData.gender"
         outlined
         required
@@ -25,6 +46,7 @@
       <v-file-input
         multiple
         label="猫画像"
+        :rules="imageRules"
         prepend-inner-icon="mdi-camera"
         prepend-icon
         show-size
@@ -39,10 +61,11 @@
         />
         <v-img v-else-if="confirmedImageShow" :src="confirmedImage" height="200" width="250" />
       </p>
-
-      <v-btn @click="catDataUpdate">
-        保存
-      </v-btn>
+      <div class="btn-wrap">
+        <v-btn class="save-btn" @click="catDataUpdate" color="#F6BBA6" width="250" height="50">
+          保存
+        </v-btn>
+      </div>
     </div>
   </v-container>
 </template>
@@ -67,6 +90,18 @@ export default {
       { age: '9' },
       { age: '10歳以上' },
     ],
+    nameRules: [v => !!v || 'お名前を入力してください。'],
+    ageRules: [v => !!v || '年齢を入力してください。'],
+    personalityRules: [
+      v => !!v || '性格・特徴を入力してください。',
+      v => v.length <= 250 || ' 250文字までです。 ',
+    ],
+    backgroundRules: [
+      v => !!v || '募集経緯を入力してください。',
+      v => v.length <= 250 || ' 250文字までです。 ',
+    ],
+    genderRules: [v => !!v || '性別を入力してください。'],
+    imageRules: [v => !!v || '画像を選択してください。'],
   }),
   computed: {
     editCatData() {
@@ -112,6 +147,7 @@ export default {
       updateFormData.append('name', this.catData.name);
       updateFormData.append('age', this.catData.age);
       updateFormData.append('personality', this.catData.personality);
+      updateFormData.append('background', this.catData.personality);
       updateFormData.append('gender', this.catData.gender);
       updateFormData.append('image', this.catData.image);
       this.$store.dispatch('cat/catDataUpdate', updateFormData);
@@ -120,4 +156,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.wrap {
+  margin: 100px auto;
+}
+
+.btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+</style>
