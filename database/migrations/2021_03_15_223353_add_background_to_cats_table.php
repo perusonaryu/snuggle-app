@@ -14,7 +14,7 @@ class AddBackgroundToCatsTable extends Migration
     public function up()
     {
         Schema::table('cats', function (Blueprint $table) {
-            $table->string('background');
+            $table->string('background')->nullabe();
         });
     }
 
