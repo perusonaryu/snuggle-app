@@ -21,13 +21,16 @@
             outlined
           ></v-text-field>
         </v-form>
-        <div class="d-flex justify-space-between">
+        <div class="mb-5 d-flex justify-space-between">
           <router-link :to="{ name: 'userRegister' }">
-            <v-btn outlined text color="#73a776">
+            <v-btn width="150" outlined text color="#73a776">
               新規登録はこちら
             </v-btn>
           </router-link>
-          <v-btn @click="login" outlined text color="#73a776">ログイン</v-btn>
+          <v-btn @click="login" width="150" outlined text color="#73a776">ログイン</v-btn>
+        </div>
+        <div class="d-flex justify-center">
+          <v-btn @click="gestLogin" outlined text color="#73a776">ゲストユーザーでログイン</v-btn>
         </div>
       </div>
     </v-container>
@@ -53,6 +56,12 @@ export default {
         this.$store.dispatch('auth/login', this.loginForm);
       }
     },
+    gestLogin(){
+      this.$store.dispatch('auth/login',{
+        email:'test@test.com',
+        password:'test1111'
+      })
+    }
   },
 };
 </script>
