@@ -94,7 +94,8 @@ class CatController extends Controller
     //お気に入りの猫だけを取得
     public function favoriteCatsGet($id){
         $favolit_cats = Cat::select('cats.*')->join('likes','cats.id', '=' , 'likes.cat_id')->where('likes.user_id',$id)->get();
-        // dd($favolit_cats);
+
+        
         return json_encode(['favolitCatsData' => $favolit_cats]);
     }
 
