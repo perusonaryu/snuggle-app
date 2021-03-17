@@ -1,6 +1,6 @@
 <template>
   <v-container class="wrap">
-    <h4 class="text-center">🐈お気に入り猫🐈</h4>
+    <h4 class="text-center title">🐈お気に入り猫🐈</h4>
     <v-row>
       <v-col
         cols="12"
@@ -52,6 +52,10 @@ export default {
 .wrap {
   margin-top: 80px;
   margin-bottom: 100px;
+}
+
+.title{
+  margin-bottom: 30px;
 }
 
 .cat-detail a {
