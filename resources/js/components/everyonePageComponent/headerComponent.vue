@@ -48,6 +48,10 @@
         </template>
 
         <v-list width="200" color="#E2E0CB">
+
+          <v-list-item class="list-item-name">
+            {{ user.name }}
+          </v-list-item>
           <v-list-item class="list-item">
             <router-link :to="{ name: 'userPage' }">
               マイページ
@@ -194,7 +198,7 @@ ul {
   border-radius: 50%;
 }
 
-.list-item{
+.list-item,.list-item-name{
   display: flex;
   justify-content: center;
   align-items: center;
