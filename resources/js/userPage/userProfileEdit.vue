@@ -29,7 +29,12 @@
       />
       <v-img v-else-if="confirmedImageShow" :src="confirmedImage" height="200" width="250" />
     </p>
-    <v-btn @click="update">保存</v-btn>
+    <div class="btn-wrap">
+        <v-btn class="save-btn" @click="update" color="#F6BBA6" width="250" height="50">
+          保存
+        </v-btn>
+      </div>
+
   </v-container>
 </template>
 
@@ -107,5 +112,12 @@ export default {
 <style scoped>
 .profile-edit {
   margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 </style>

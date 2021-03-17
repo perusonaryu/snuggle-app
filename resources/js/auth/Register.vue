@@ -8,12 +8,14 @@
             v-model="registerForm.name"
             :rules="nameRules"
             label="お名前"
+            placeholder="username"
             outlined
             required
           ></v-text-field>
           <v-text-field
             v-model="registerForm.email"
             type="email"
+            placeholder="example@example.com"
             label="メールアドレス"
             :rules="emailRules"
             outlined
@@ -87,9 +89,13 @@ export default {
         v => !!v || 'メールアドレスを入力してください。',
         v => /.+@.+\..+/.test(v) || 'メールアドレスは不正な値です。',
       ],
-      passwordRules: [v => !!v || 'パスワードを入力してください。'],
+      passwordRules: [
+        v => !!v || 'パスワードを入力してください。',
+        v => v.length >= 8 || ' 8文字以上です。 ',
+      ],
       confirmPasswordRules: [
         v => !!v || '確認用パスワードを入力してください。',
+        v => v.length >= 8 || ' 8文字以上です。 ',
         v => v === this.registerForm.password || 'パスワードと一致しません。',
       ],
       prefecturesRules: [v => !!v || '地域を選択してください。'],

@@ -10,6 +10,7 @@
             label="メールアドレス"
             color="#73a776"
             :rules="emailRules"
+            placeholder="example@example.com"
             outlined
           ></v-text-field>
           <v-text-field
@@ -48,7 +49,10 @@ export default {
       v => !!v || 'メールアドレスを入力してください。',
       v => /.+@.+\..+/.test(v) || 'メールアドレスは不正な値です。',
     ],
-    passwordRules: [v => !!v || 'パスワードを入力してください。'],
+    passwordRules: [
+      v => !!v || 'パスワードを入力してください。',
+      v => v.length >= 8 || ' 8文字以上です。 ',
+    ],
   }),
   methods: {
     login() {
@@ -56,12 +60,12 @@ export default {
         this.$store.dispatch('auth/login', this.loginForm);
       }
     },
-    gestLogin(){
-      this.$store.dispatch('auth/login',{
-        email:'test@test.com',
-        password:'test1111'
-      })
-    }
+    gestLogin() {
+      this.$store.dispatch('auth/login', {
+        email: 'test@test.com',
+        password: 'test1111',
+      });
+    },
   },
 };
 </script>
