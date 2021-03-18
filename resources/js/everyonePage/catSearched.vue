@@ -13,7 +13,7 @@
       @change="search"
     ></v-select>
 
-    <v-row v-if="catsSearchedData" class="content">
+    <v-row v-if="catsSearchedData.length > 0" class="content">
       <v-col
         cols="12"
         md="4"
@@ -37,6 +37,7 @@
         </div>
       </v-col>
     </v-row>
+    <h3 v-else>該当する猫はいません。</h3>
   </v-container>
 </template>
 

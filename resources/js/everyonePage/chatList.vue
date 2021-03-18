@@ -2,7 +2,7 @@
   <v-container class="chat-user-list">
     <v-row justify="center">
       <v-col md="8" cols="12">
-        <v-card class="mx-auto" tile>
+        <v-card class="mx-auto" tile v-if="chatList.length > 0">
           <v-list>
             <v-subheader>トークリスト</v-subheader>
             <v-list-item-group color="primary">
@@ -26,6 +26,7 @@
             </v-list-item-group>
           </v-list>
         </v-card>
+        <h3 v-else class="text-center">チャットをしているユーザーはいません。</h3>
       </v-col>
     </v-row>
   </v-container>
