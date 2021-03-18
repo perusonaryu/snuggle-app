@@ -7,12 +7,12 @@ jobs:
         environment:
           - MYSQL_DATABASE: testdb
           # - MYSQL_USER: 'root'
+          - DB_HOST: 127.0.0.1
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           # - MYSQL_PASSWORD: root
           # - MYSQL_ROOT_PASSWORD: 'root'
           # - MYSQL_ALLOW_EMPTY_PASSWORD: yes
-    environment:
-      - DB_HOST: 127.0.0.1
+      
     steps:
       #==========ここから追加==========
       - checkout
