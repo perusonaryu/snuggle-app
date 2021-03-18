@@ -39,13 +39,13 @@ class CatController extends Controller
     }
 
     public function get(){
-        $cats =  Cat::get();
+        $cats =  Cat::orderBy('created_at', 'desc')->get();
 
         return json_encode(['catsData' => $cats]);
     }
 
     public function topGet(){
-        $cats =  Cat::take(9)->get();
+        $cats =  Cat::take(9)->orderBy('created_at', 'desc')->get();
 
         return json_encode(['catsData' => $cats]);
     }
