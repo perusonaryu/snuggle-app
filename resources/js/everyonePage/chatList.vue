@@ -17,6 +17,11 @@
                   :userId="user.id"
                   :chatUserId="chat.user_id_2"
                 ></chat-list>
+                <chat-list
+                  v-else-if="user.id == chat.user_id_2 && user.id == chat.user_id_1"
+                  :userId="user.id"
+                  :chatUserId="chat.user_id_2"
+                ></chat-list>
               </v-list-item>
             </v-list-item-group>
           </v-list>

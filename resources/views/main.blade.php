@@ -8,9 +8,6 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
-            *{
-                color:#333333;
-            }
 
 
             a{

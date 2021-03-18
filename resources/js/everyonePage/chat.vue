@@ -2,30 +2,41 @@
   <v-container>
     <div class="chat" v-if="user">
       <div class="message-list">
-        <h4 v-if="chatUserData">{{ chatUserData.name }}さん</h4>
+        <div v-if="chatUserData" class="d-flex align-center mb-5">
+          <div>
+            <v-img
+              class="chat-user-image"
+              :src="`/storage/userImages/${chatUserData.image}`"
+              width="50"
+              height="50"
+            ></v-img>
+          </div>
+          <h4>{{ chatUserData.name }}さん</h4>
+        </div>
         <div v-for="messageData in messageList" :key="messageData.id">
           <div v-if="messageData.send_user === user.id" class="send-message">
-            <p class="message">
-              {{ messageData.message }}
-            </p>
+            <p class="message">{{ messageData.message }}</p>
             <p class="datetime">{{ messageData.created_at | datetime }}</p>
           </div>
           <div v-else class="receive-message">
             <p class="chat-user-name">{{ chatUserData.name }}</p>
-            <p class="message">
-              {{ messageData.message }}
-            </p>
+            <p class="message">{{ messageData.message }}</p>
             <p class="datetime">{{ messageData.created_at | datetime }}</p>
           </div>
         </div>
       </div>
-
-      <p v-if="messageError" class="error-message">メッセージを入力してください！</p>
-      <div class="d-flex">
-        <v-text-field v-model="message" solo label="メッセージ" clearable></v-text-field>
-        <v-btn @click="send" color="#E2E0CB" height="48">送信</v-btn>
+      <div class="message-text">
+        <v-textarea
+          solo
+          counter
+          :rules="messageRules"
+          v-model="message"
+          label="メッセージ"
+        ></v-textarea>
+        <div class="d-flex justify-center">
+          <v-btn :disabled="messageCheck"  @click="send" class="send-btn" color="#f6bba6" width="200" height="50">送信</v-btn>
+        </div>
       </div>
-      
     </div>
   </v-container>
 </template>
@@ -35,8 +46,12 @@ import moment from 'moment';
 export default {
   data: () => ({
     message: '',
-    messageError:false,
+    messageError: false,
     messageList: '',
+    messageRules: [
+      v => !!v || 'メッセージを入力してください。',
+      v => v.length <= 250 || ' 250文字までです。 ',
+    ],
   }),
   computed: {
     user() {
@@ -45,6 +60,14 @@ export default {
     chatUserData() {
       return this.$store.getters['cat/postedUserData'];
     },
+    messageCheck(){
+      if(this.message){
+        return false;
+      }else{
+        return true;
+      }
+      
+    }
   },
   mounted() {
     if (this.user) {
@@ -67,7 +90,7 @@ export default {
   },
   methods: {
     send() {
-      if(this.message){
+      if (this.message) {
         this.messageError = false;
         axios
           .post('api/send', {
@@ -85,8 +108,7 @@ export default {
           .catch(error => {
             console.log(error);
           });
-
-      }else{
+      } else {
         this.messageError = true;
       }
     },
@@ -123,6 +145,10 @@ p {
   margin: 100px auto 100px;
 }
 
+.chat-user-image {
+  border-radius: 50%;
+}
+
 .message {
   border: 1px solid black;
   border-radius: 10px;
@@ -130,10 +156,20 @@ p {
   padding: 5px;
   max-width: 50%;
   word-break: break-all;
+  white-space: pre;
+  text-align: left;
 }
 
 .send-message {
   text-align: right;
+}
+
+.send-message .message {
+  background: #f6bba6;
+}
+
+.receive-message .message {
+  background: #e2e0cb;
 }
 
 .receive-message,
@@ -144,10 +180,5 @@ p {
 .chat-user-name,
 .datetime {
   font-size: 10px;
-}
-
-.error-message{
-  color:red;
-  font-size:12px;
 }
 </style>

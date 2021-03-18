@@ -145,7 +145,7 @@ dl dd {
   padding-left: 50px;
   margin: 0;
   width: 80%;
-  white-space: pre !important;
+  white-space: pre;
 }
 
 .chat-btn{
