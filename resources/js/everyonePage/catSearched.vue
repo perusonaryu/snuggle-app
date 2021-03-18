@@ -84,9 +84,9 @@ export default {
     search() {
       if (this.searchWord == '全て') {
         axios
-          .get('api/search', { params: '' })
+          .get('api/cats/data')
           .then(result => {
-            this.catsData = result.data.searchedCatsData;
+            this.catsData = result.data.catsData;
             this.error = false;
           })
           .catch(error => {
