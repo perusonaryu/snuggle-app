@@ -49,7 +49,7 @@ class UserController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'region' => ['required','string'],
-            'image' => ['required','image'],
+            'image' => ['required'],
         ]);
     }
 }

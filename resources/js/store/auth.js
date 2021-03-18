@@ -88,6 +88,7 @@ const actions = {
             }
         }).then((result) => {
             context.commit('setUser',result.data.user);
+            router.push({ name: 'userPage' });
         }).catch(error => {
             console.log(error);
         })

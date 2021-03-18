@@ -1,4 +1,5 @@
 
+import router from '../router'
 
 const state = {
     myCatsList:'',
@@ -50,7 +51,8 @@ const actions = {
         }})
         .then( (result) => {
             console.log('猫を登録しました!');
-            alert('猫を登録しました！')
+            router.push({ name: 'userPage' });
+
         })
         .catch( (error) => {
             console.log(error);
@@ -80,6 +82,7 @@ const actions = {
         })
         .then((result) => {
             context.commit('setCatEditData',result.data.catData[0]);
+
         })
     },
     catDataUpdate(context,data){
@@ -90,7 +93,7 @@ const actions = {
             }
         }).then( (result) => {
             context.commit('setCatEditData',result.data.catData);
-            alert('保存しました！')
+            router.push({ name: 'userPage' });
         }).catch( (error) => {
             console.log(error);
         })

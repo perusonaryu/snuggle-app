@@ -81,9 +81,7 @@ export default {
       updateFormData.append('region', this.userData.region);
       updateFormData.append('introduction', this.userData.introduction);
       updateFormData.append('image', this.userData.image);
-      this.$store.dispatch('auth/userUpdate', updateFormData).then(() => {
-        alert('保存しました！');
-      });
+      this.$store.dispatch('auth/userUpdate', updateFormData);
     },
 
     //確認用画像
