@@ -3,15 +3,15 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
-      - image: circleci/mysql:5.7
-        environment:
-          - MYSQL_DATABASE: testdb
-          - MYSQL_USER: root
-          - MYSQL_PASSWORD: root
-          - MYSQL_ROOT_PASSWORD: root
-          - MYSQL_ALLOW_EMPTY_PASSWORD: yes
-    environment:
-      - DB_HOST: 127.0.0.1
+    #   - image: circleci/mysql:5.7
+    #     environment:
+    #       - MYSQL_DATABASE: testdb
+    #       - MYSQL_USER: root
+    #       - MYSQL_PASSWORD: root
+    #       - MYSQL_ROOT_PASSWORD: root
+    #       - MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    # environment:
+    #   - DB_HOST: 127.0.0.1
     steps:
       #==========ここから追加==========
       - checkout
@@ -41,9 +41,9 @@ jobs:
           paths:
             - node_modules
       - run: npm run dev
-      - run:
-          name: php test
-          command: ./vendor/bin/phpunit
+      # - run:
+      #     name: php test
+      #     command: ./vendor/bin/phpunit
   deploy:
     docker:
       - image: circleci/php:7.3-node-browsers
