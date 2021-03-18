@@ -6,7 +6,7 @@ jobs:
       - image: circleci/mysql:5.7
         environment:
           - MYSQL_DATABASE: testdb
-          - MYSQL_ROOT_PASSWORD:
+          - MYSQL_PASSWORD: root
     environment:
       - DB_HOST: 127.0.0.1
     steps:
