@@ -34,7 +34,15 @@
           label="メッセージ"
         ></v-textarea>
         <div class="d-flex justify-center">
-          <v-btn :disabled="messageCheck"  @click="send" class="send-btn" color="#f6bba6" width="200" height="50">送信</v-btn>
+          <v-btn
+            :disabled="messageCheck"
+            @click="send"
+            class="send-btn"
+            color="#f6bba6"
+            width="200"
+            height="50"
+            >送信</v-btn
+          >
         </div>
       </div>
     </div>
@@ -60,14 +68,13 @@ export default {
     chatUserData() {
       return this.$store.getters['cat/postedUserData'];
     },
-    messageCheck(){
-      if(this.message){
+    messageCheck() {
+      if (this.message) {
         return false;
-      }else{
+      } else {
         return true;
       }
-      
-    }
+    },
   },
   mounted() {
     if (this.user) {
@@ -125,10 +132,12 @@ export default {
       Echo.options.auth.headers['Authorization'] = `Bearer ${token}`;
 
       Echo.private('message.' + this.$route.params.userId).listen('.message-sent', e => {
-        this.messageList.push({
-          message: e.message,
-          send_user: e.send_user,
-        });
+        if (this.$route.params.chatUserId == e.send_user) {
+          this.messageList.push({
+            message: e.message,
+            send_user: e.send_user,
+          });
+        }
       });
     },
   },
