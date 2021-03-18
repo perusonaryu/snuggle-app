@@ -10,7 +10,7 @@ jobs:
           - DB_HOST: 127.0.0.1
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_PASSWORD: root
-          - MYSQL_ROOT_PASSWORD: 'root'
+          - MYSQL_ROOT_PASSWORD: secret
           # - MYSQL_ALLOW_EMPTY_PASSWORD: yes
       
     steps:
