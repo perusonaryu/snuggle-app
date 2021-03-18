@@ -20,7 +20,7 @@
         </v-img>
         <div class="cat-content">
           <p class="text-center cat-name">{{ catData.name }}</p>
-          <like-check class="check-btn" :catId="catData.id" :userId="userId" />
+          <like-check v-if="userId != catData.user_id" class="check-btn" :catId="catData.id" :userId="userId" />
         </div>
       </v-col>
     </v-row>

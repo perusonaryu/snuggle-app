@@ -4,45 +4,58 @@
 snuggleは猫を買いたい人、やむをえない事情により里親を探したい人、
 今は猫が買えないが猫が好きな人を繋げるアプリです。
 
-**[リンク](https://portfolio.snuggle-app.com/)**
+**[ポートフォリオURL](https://portfolio.snuggle-app.com/)**
 
 ## トップページ
 
+<p align="center">
+<img src="https://d.kuku.lu/cf06153bb9">
+</p>
+
+## 使用技術
+* フロントエンド
+    * HTML/CSS
+    * JavaScript
+    * vue.js
+    * vuetify(UIフレームワーク)
+    * Prettier(コード解析ツール)
+    * pusher API
+
+* バックエンド
+    * php 7.3.22
+    * Laravel 7.30.4
+
+* インフラ
+    * MySQL 5.7
+    * Nginx
+    * AWS(EC2,RDS,Route53,VPC)
+    * Circle(CI/CD)
+
+* テスト
+    * phpunit
+
+## ER図
+<p align="center">
+<img src="https://d.kuku.lu/fcede6900f">
+</p>
+
+## AWS構成図
+
+<p align="center">
+<img src=https://d.kuku.lu/f587cf85cd"">
+</p>
+
+## 機能一覧
+* 新規会員登録
+* ログイン・ログアウト機能
+* 簡単ログイン機能
+* ユーザー情報編集機能
+* 検索機能
+* 猫お気に入り機能
+* お気に入り一覧表示
+* 猫登録機能
+* 猫編集・削除機能
+* 画像投稿機能
+* リアルタイムチャット機能(pusher,LaravelEcho)
 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

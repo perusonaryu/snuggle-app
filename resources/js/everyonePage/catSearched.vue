@@ -33,7 +33,7 @@
         </v-img>
         <div class="cat-content">
           <p class="text-center cat-name">{{ catData.name }}</p>
-          <like-check class="check-btn" :catId="catData.id" :userId="userId" />
+          <like-check v-if="user.id != catData.user_id" class="check-btn" :catId="catData.id" :userId="user.id" />
         </div>
       </v-col>
     </v-row>
@@ -45,7 +45,6 @@ import prefectureData from '../prefectureData.json';
 export default {
   data: () => ({
     catsData: '',
-    userId: '',
     searchWord: '',
     error: false,
     prefectures: [],
