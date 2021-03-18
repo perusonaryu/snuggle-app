@@ -44,6 +44,7 @@ Route::delete('cat/delete/{cat_id}','CatController@delete')->name('cat.delete');
 Route::get('posted/user/detail/{id}','UserController@detail');
 
 
+Route::get('cats/topdata','CatController@topget');
 Route::get('cats/data','CatController@get');
 Route::get('cat/detail/{id}','CatController@detail');
 

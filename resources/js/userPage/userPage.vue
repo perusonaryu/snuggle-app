@@ -16,9 +16,15 @@
             プロフィール <br />
             {{ userData.introduction }}
           </p>
-          <router-link to="/userProfileEdit">
-            <v-btn color="#F6BBA6" width="250" height="50">プロフィール編集</v-btn>
-          </router-link>
+          <div class="d-flex justify-center">
+            <router-link to="/userProfileEdit" class="mr-5">
+              <v-btn color="#F6BBA6" width="150" height="50">プロフィール編集</v-btn>
+            </router-link>
+
+            <router-link :to="{ name: 'catRegister' }" class="ml-5">
+              <v-btn color="#F6BBA6" width="150" height="50">猫登録</v-btn>
+            </router-link>
+          </div>
         </div>
       </v-col>
 
@@ -74,7 +80,7 @@ export default {
   margin: 0 auto;
 }
 
-.profile{
-  padding:10px;
+.profile {
+  padding: 10px;
 }
 </style>

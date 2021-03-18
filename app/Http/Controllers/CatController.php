@@ -39,6 +39,12 @@ class CatController extends Controller
     }
 
     public function get(){
+        $cats =  Cat::get();
+
+        return json_encode(['catsData' => $cats]);
+    }
+
+    public function topGet(){
         $cats =  Cat::take(9)->get();
 
         return json_encode(['catsData' => $cats]);

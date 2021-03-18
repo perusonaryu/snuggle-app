@@ -35,7 +35,7 @@ export default {
   props: ['userId'],
 
   mounted() {
-    this.$store.dispatch('cat/allCatsData');
+    this.$store.dispatch('cat/topCatsData');
     this.$store.subscribe(mutations => {
       if (mutations.type === 'cat/setAllCatData') {
         this.AllCatData = this.$store.getters['cat/allCatData'];

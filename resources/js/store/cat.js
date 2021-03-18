@@ -101,6 +101,12 @@ const actions = {
             context.commit('setAllCatData',result.data.catsData);
         })
     },
+    topCatsData(context){
+        axios.get('api/cats/topdata')
+        .then( (result) => {
+            context.commit('setAllCatData',result.data.catsData);
+        })
+    },
     catDatailGet(context,catiId){
         axios.get('api/cat/detail/' + catiId)
         .then( (result) =>{
