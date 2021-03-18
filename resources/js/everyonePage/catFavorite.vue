@@ -1,7 +1,7 @@
 <template>
   <v-container class="wrap">
     <h4 class="text-center title">🐈お気に入り猫🐈</h4>
-    <v-row>
+    <v-row v-if="catsData.length > 0">
       <v-col
         cols="12"
         md="4"
@@ -25,6 +25,7 @@
         </div>
       </v-col>
     </v-row>
+    <h4 class="text-center" v-else>現在お気に入りの猫はいません。</h4>
   </v-container>
 </template>
 
