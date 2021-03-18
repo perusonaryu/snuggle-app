@@ -9,7 +9,7 @@ snuggleは猫を買いたい人、やむをえない事情により里親を探�
 ## トップページ
 
 <p align="center">
-<img src="https://d.kuku.lu/cf06153bb9">
+<img src="./README-images/toppage.png">
 </p>
 
 ## 使用技術
@@ -36,13 +36,13 @@ snuggleは猫を買いたい人、やむをえない事情により里親を探�
 
 ## ER図
 <p align="center">
-<img src="https://d.kuku.lu/fcede6900f">
+<img src="./README-images/snuggle-db.jpg">
 </p>
 
 ## AWS構成図
 
 <p align="center">
-<img src=https://d.kuku.lu/f587cf85cd"">
+<img src="./README-images/snuggle-aws.jpg">
 </p>
 
 ## 機能一覧
