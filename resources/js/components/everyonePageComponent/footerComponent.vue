@@ -1,7 +1,14 @@
 <template>
   <div class="footer">
     <div class="logo">
-      <img src="/storage/nekologo3.png" />
+      <router-link
+        class="logo"
+        :to="{
+          name: 'topPage',
+        }"
+      >
+        <img src="/storage/nekologo3.png" />
+      </router-link>
     </div>
     <p class="copyright text-center">Copyright &copy; snuggle All Rights Reserved</p>
   </div>
@@ -16,8 +23,8 @@ export default {};
   width: 100%;
   padding: 5px 0;
   background-color: #f6bba6;
-  position:absolute;
-  bottom:0;
+  position: absolute;
+  bottom: 0;
 }
 
 .logo {

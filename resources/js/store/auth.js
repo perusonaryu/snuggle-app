@@ -49,7 +49,7 @@ const actions = {
         });
     },
 
-    logout(context) {
+    logout(context,currentPath) {
         axios.post('/api/logout', null,{
             headers: {
                 Authorization: `Bearer ${state.token}`,
@@ -59,7 +59,7 @@ const actions = {
             console.log(result.data);
             context.commit("resetUser", null);
             context.commit("setToken", null);
-            if (router.path != '/') router.push({ name: 'topPage' });
+            if (currentPath != '/') router.push({ name: 'topPage' });
             
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
