@@ -12,9 +12,9 @@
         <div class="profile">
           <h5 class="">{{ userData.name }}</h5>
           <p>{{ userData.region }}</p>
-          <p>
+          <p >
             プロフィール <br />
-            {{ userData.introduction }}
+            <span class="profile-detail">{{userData.introduction}}</span>
           </p>
           <div class="d-flex justify-center">
             <router-link to="/userProfileEdit" class="mr-5">
@@ -22,7 +22,7 @@
             </router-link>
 
             <router-link :to="{ name: 'catRegister' }" class="ml-5">
-              <v-btn color="#F6BBA6" width="150" height="50">猫登録</v-btn>
+              <v-btn color="#F6BBA6" width="150" height="50">猫登録🐈</v-btn>
             </router-link>
           </div>
         </div>
@@ -82,5 +82,9 @@ export default {
 
 .profile {
   padding: 10px;
+}
+
+.profile-detail{
+  white-space: pre;
 }
 </style>
