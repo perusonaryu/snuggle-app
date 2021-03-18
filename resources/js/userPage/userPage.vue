@@ -22,7 +22,7 @@
             </router-link>
 
             <router-link :to="{ name: 'catRegister' }" class="ml-5">
-              <v-btn color="#F6BBA6" width="150" height="50">猫登録</v-btn>
+              <v-btn color="#F6BBA6" width="150" height="50">猫登録🐈</v-btn>
             </router-link>
           </div>
         </div>
