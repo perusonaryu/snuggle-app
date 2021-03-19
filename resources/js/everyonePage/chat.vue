@@ -165,7 +165,7 @@ p {
   padding: 5px;
   max-width: 50%;
   word-break: break-all;
-  white-space: pre;
+  white-space: pre-wrap;
   text-align: left;
 }
 
