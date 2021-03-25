@@ -68,5 +68,6 @@ export default {
 <style scoped>
 .chat-user-list {
   margin-top: 100px;
+  margin-bottom: 100px;
 }
 </style>
