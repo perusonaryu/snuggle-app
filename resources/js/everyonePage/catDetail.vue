@@ -7,8 +7,8 @@
       </v-col>
       <v-col md="9" cols="12" class="cat-detail">
         <dl>
-          <dt>掲載者のお名前</dt>
-          <dd> {{ catPostedUserData.name }} </dd>
+          <dt>掲載者</dt>
+          <dd>{{ catPostedUserData.name }}</dd>
           <dt>現在所在地</dt>
           <dd>{{ catPostedUserData.region }}</dd>
           <hr />
@@ -32,19 +32,18 @@
           <div class="detail-title">性格・特徴</div>
           <p>{{ catDetail.personality }}</p>
         </div>
-        <hr>
-        <div class="chat-btn">
+        <hr />
+        <div class="chat-btn" v-if="catDetail.user_id != user.id">
           <router-link
             v-if="catDetail"
             :to="{
               name: 'chat',
-              params: { chatUserId: catDetail.user_id,userId:user.id },
+              params: { chatUserId: catDetail.user_id, userId: user.id },
             }"
           >
             <v-btn color="#F6BBA6" width="250" height="50">里親を申し出る・質問をする</v-btn>
           </router-link>
         </div>
-        
       </v-col>
     </v-row>
   </v-container>
@@ -63,9 +62,9 @@ export default {
     catPostedUserData() {
       return this.$store.getters['cat/postedUserData'];
     },
-    user(){
+    user() {
       return this.$store.getters['auth/user'];
-    }
+    },
   },
   mounted() {
     this.catDatailGet();
@@ -90,7 +89,7 @@ export default {
 <style scoped>
 .wrap {
   margin-top: 60px;
-  margin-bottom: 100px;
+  margin-bottom: 150px;
 }
 
 .image img {
@@ -98,6 +97,7 @@ export default {
   background-position: center;
   width: 100%;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .cat-detail {
@@ -130,29 +130,59 @@ dl dd {
   display: inline-block;
 }
 
+dl dt,
+.detail-title {
+  background-color: #f6bba6;
+}
+
 .detail-title {
   font-size: 14px;
   font-weight: bold;
-  width: 10%;
+  width: 20%;
+  padding: 15px 0px 15px 20px;
+  display: flex;
+  align-items: center;
 }
 
 .content-wrap {
-  padding: 20px;
   display: flex;
 }
 
 .content-wrap p {
-  padding-left: 50px;
+  padding: 15px 20px;
   margin: 0;
   width: 80%;
   white-space: pre;
 }
 
-.chat-btn{
-  padding:20px;
+.chat-btn {
+  padding: 20px;
   display: flex;
   justify-content: center;
 }
 
+@media screen and (max-width: 480px) {
+  dl dt {
+    width: 100%;
+    padding: 15px 0 15px 20px;
+  }
 
+  dl dd {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 0;
+  }
+
+  .content-wrap{
+    display: block;
+  }
+  
+  .detail-title {
+    width: 100%;
+  }
+
+  .content-wrap p {
+    width: 100%;
+  }
+}
 </style>
