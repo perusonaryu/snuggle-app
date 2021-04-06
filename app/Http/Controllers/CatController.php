@@ -27,6 +27,9 @@ class CatController extends Controller
                 'gender' => $request->gender,
                 'image' => $file_name,
                 'user_id' => $request->userId,
+                'region' => $request->region,
+                'castration_surgery' => $request->castrationSurgery,
+                'vaccine' => $request->vaccine,
             ]);
 
             return json_encode(['success' => '猫を登録しました!']);
@@ -63,6 +66,7 @@ class CatController extends Controller
     }
 
     public function update(Request $request){
+
         $this->updatevalidator($request->all())->validate();
         $cat = Cat::find($request->id);
         $cat->name = $request->name;
@@ -70,6 +74,9 @@ class CatController extends Controller
         $cat->personality = $request->personality;
         $cat->background = $request->background;
         $cat->gender = $request->gender;
+        $cat->region = $request->region;
+        $cat->castration_surgery = $request->castrationSurgery;
+        $cat->vaccine = $request->vaccine;
         if(!is_string($request->image)){
             
 
@@ -128,6 +135,9 @@ class CatController extends Controller
             'background' => ['required','string'],
             'gender' => ['required','string'],
             'image' => ['required','image'],
+            'region' => ['required','string'],
+            'castrationSurgery' => ['required','string'],
+            'vaccine' => ['required','string'],
         ]);
     }
 
@@ -140,6 +150,9 @@ class CatController extends Controller
             'background' => ['required','string'],
             'image' => ['required'],
             'gender' => ['required'],
+            'region' => ['required','string'],
+            'castrationSurgery' => ['required','string'],
+            'vaccine' => ['required','string'],
         ]);
     }
 }

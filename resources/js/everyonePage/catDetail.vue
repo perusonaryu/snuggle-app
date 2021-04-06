@@ -16,10 +16,10 @@
           <dd>{{ catDetail.gender }}</dd>
           <dt>年齢</dt>
           <dd>{{ catDetail.age }}歳</dd>
-          <!-- <dt>去勢</dt>
-          <dd>している</dd>
+          <dt>不妊去勢手術</dt>
+          <dd>{{catDetail.castration_surgery}}</dd>
           <dt>ワクチン</dt>
-          <dd>接種済み</dd> -->
+          <dd>{{catDetail.vaccine}}</dd>
 
           <hr />
         </dl>
@@ -96,8 +96,10 @@ export default {
   background-size: cover;
   background-position: center;
   width: 100%;
+  height: 400px;
   border-radius: 10px;
   margin-bottom: 20px;
+  object-fit: cover;
 }
 
 .cat-detail {
@@ -176,7 +178,7 @@ dl dt,
   .content-wrap{
     display: block;
   }
-  
+
   .detail-title {
     width: 100%;
   }

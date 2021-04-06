@@ -23,7 +23,6 @@ class CatTest extends TestCase
     {
         $dummyImage = UploadedFile::fake()->image('test.png');
         $user = factory(User::class)->create();
-        // dd($dummyImage);
         $cat = [
             'name' => 'テスト猫',
             'age' => '10',
@@ -32,6 +31,9 @@ class CatTest extends TestCase
             'background' => 'testtestetstestestestest',
             'image' => $dummyImage,
             'userId' => $user->id,
+            'castrationSurgery' => '済',
+            'region' => '東京',
+            'vaccine' => '済',
         ];
 
         $response = $this->post(route('cat.register'), $cat);
@@ -68,6 +70,9 @@ class CatTest extends TestCase
             'personality' => 'おとなしい',
             'background' => 'testtestetstestestestest',
             'image' => 'test.jpg',
+            'castrationSurgery' => '済',
+            'region' => '東京',
+            'vaccine' => '済',
         ];
 
 
@@ -84,6 +89,4 @@ class CatTest extends TestCase
 
         $response ->assertStatus(200);
     }
-
-    
 }

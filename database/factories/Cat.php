@@ -14,5 +14,8 @@ $factory->define(Cat::class, function (Faker $faker) {
         'background' => 'testtesttesttesttesttest',
         'gender' => 'オス',
         'user_id' => 1,
+        'castration_surgery' => '済',
+        'region' => '東京',
+        'vaccine' => '済',
     ];
 });
