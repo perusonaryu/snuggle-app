@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="top-image">
       <img src="/storage/cat-top-image.png" alt="" />
-      <p class="register-btn">
+      <p class="register-btn" v-if="!userData">
         <router-link :to="{ name: 'userRegister' }">
           新規登録の方はこちら
         </router-link>
