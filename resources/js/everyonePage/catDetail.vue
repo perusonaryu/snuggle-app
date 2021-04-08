@@ -15,7 +15,9 @@
           <dt>性別</dt>
           <dd>{{ catDetail.gender }}</dd>
           <dt>年齢</dt>
-          <dd>{{ catDetail.age }}歳</dd>
+          <dd v-if="catDetail.age.length <= 1">{{ catDetail.age }}歳</dd>
+          <dd v-else> {{catDetail.age}} </dd>
+          <hr />
           <dt>不妊去勢手術</dt>
           <dd>{{catDetail.castration_surgery}}</dd>
           <dt>ワクチン</dt>
@@ -32,7 +34,7 @@
           <div class="detail-title">性格・特徴</div>
           <p>{{ catDetail.personality }}</p>
         </div>
-        <hr />
+        <hr v-if="catDetail.user_id != user.id" />
         <div class="chat-btn" v-if="catDetail.user_id != user.id">
           <router-link
             v-if="catDetail"
