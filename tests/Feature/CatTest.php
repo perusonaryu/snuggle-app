@@ -19,26 +19,26 @@ class CatTest extends TestCase
      *
      * @return void
      */
-    public function testCatRegister()
-    {
-        $dummyImage = UploadedFile::fake()->image('test.png');
-        $user = factory(User::class)->create();
-        $cat = [
-            'name' => 'テスト猫',
-            'age' => '10',
-            'gender' => 'おす',
-            'personality' => 'おとなしい',
-            'background' => 'testtestetstestestestest',
-            'image' => $dummyImage,
-            'userId' => $user->id,
-            'castrationSurgery' => '済',
-            'region' => '東京',
-            'vaccine' => '済',
-        ];
+    // public function testCatRegister()
+    // {
+    //     $dummyImage = UploadedFile::fake()->image('test.png');
+    //     $user = factory(User::class)->create();
+    //     $cat = [
+    //         'name' => 'テスト猫',
+    //         'age' => '10',
+    //         'gender' => 'おす',
+    //         'personality' => 'おとなしい',
+    //         'background' => 'testtestetstestestestest',
+    //         'image' => $dummyImage,
+    //         'userId' => $user->id,
+    //         'castrationSurgery' => '済',
+    //         'region' => '東京',
+    //         'vaccine' => '済',
+    //     ];
 
-        $response = $this->post(route('cat.register'), $cat);
-        $response->assertStatus(200);
-    }
+    //     $response = $this->post(route('cat.register'), $cat);
+    //     $response->assertStatus(200);
+    // }
 
 
     public function testMyCatdataGet()

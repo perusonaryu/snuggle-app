@@ -17,7 +17,7 @@ class CatController extends Controller
         if($request->image){
             // $file_name = $request->userId.'-'.$request->image->getClientOriginalName();
             // $request->image->storeAs('public/catImages',$file_name);
-
+            
             $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
 
             Cat::create([
