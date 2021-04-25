@@ -8,7 +8,8 @@
     }"
   >
     <v-list-item-avatar height="70" width="70">
-      <v-img :src="`/storage/userImages/${chatUser.image}`"></v-img>
+      <v-img :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${chatUser.image}`" v-if="chatUser.image.match('userImages')"></v-img>
+      <v-img :src="`/storage/userImages/${chatUser.image}`" v-else></v-img>
     </v-list-item-avatar>
     <v-list-item-content>
       <v-list-item-title class="chat-user-name" v-text="chatUser.name"></v-list-item-title>

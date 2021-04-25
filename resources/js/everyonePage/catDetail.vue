@@ -3,9 +3,13 @@
     <v-row justify="center" align="center">
       <v-col class="image" md="6" cols="12" v-if="catId == this.catDetail.id">
         <h2 class="text-center">{{ catDetail.name }}</h2>
-        <img :src="`/storage/catImages/${catDetail.image}`" />
+        <img
+          :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${catDetail.image}`"
+          v-if="catDetail.image.match('catImages')"
+        />
+        <img :src="`/storage/catImages/${catDetail.image}`" v-else />
       </v-col>
-      <v-col md="9" cols="12" class="cat-detail">
+      <v-col md="9" cols="12" class="cat-detail" v-if="catPostedUserData">
         <dl>
           <dt>掲載者</dt>
           <dd>{{ catPostedUserData.name }}</dd>
@@ -16,12 +20,12 @@
           <dd>{{ catDetail.gender }}</dd>
           <dt>年齢</dt>
           <dd v-if="catDetail.age.length <= 1">{{ catDetail.age }}歳</dd>
-          <dd v-else> {{catDetail.age}} </dd>
+          <dd v-else>{{ catDetail.age }}</dd>
           <hr />
           <dt>不妊去勢手術</dt>
-          <dd>{{catDetail.castration_surgery}}</dd>
+          <dd>{{ catDetail.castration_surgery }}</dd>
           <dt>ワクチン</dt>
-          <dd>{{catDetail.vaccine}}</dd>
+          <dd>{{ catDetail.vaccine }}</dd>
 
           <hr />
         </dl>
@@ -177,7 +181,7 @@ dl dt,
     margin: 0;
   }
 
-  .content-wrap{
+  .content-wrap {
     display: block;
   }
 

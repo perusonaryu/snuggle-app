@@ -22,7 +22,20 @@
         :key="catData.name"
         class="cat-detail"
       >
-        <v-img :src="`/storage/catImages/${catData.image}`" class="cat-image">
+        <v-img
+          :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${catData.image}`"
+          class="cat-image"
+          v-if="catData.image.match('catImages')"
+        >
+          <router-link
+            :to="{
+              name: 'catDetail',
+              params: { catId: catData.id },
+            }"
+          >
+          </router-link>
+        </v-img>
+        <v-img :src="`/storage/catImages/${catData.image}`" class="cat-image" v-else>
           <router-link
             :to="{
               name: 'catDetail',
@@ -33,7 +46,12 @@
         </v-img>
         <div class="cat-content">
           <p class="text-center cat-name">{{ catData.name }}</p>
-          <like-check v-if="user.id != catData.user_id" class="check-btn" :catId="catData.id" :userId="user.id" />
+          <like-check
+            v-if="user.id != catData.user_id"
+            class="check-btn"
+            :catId="catData.id"
+            :userId="user.id"
+          />
         </div>
       </v-col>
     </v-row>

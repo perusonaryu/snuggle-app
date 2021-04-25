@@ -6,7 +6,16 @@
           class="user-image"
           width="100%"
           height="300"
+          :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${userData.image}`"
+          v-if="userData.image.match('userImages')"
+        >
+        </v-img>
+        <v-img
+          class="user-image"
+          width="100%"
+          height="300"
           :src="`/storage/userImages/${userData.image}`"
+          v-else
         >
         </v-img>
         <div class="profile">

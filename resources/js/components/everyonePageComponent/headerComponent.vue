@@ -8,7 +8,7 @@
     >
       <img src="/storage/nekologo3.png" />
     </router-link>
-    <ul >
+    <ul>
       <li>
         <router-link
           :to="{
@@ -18,29 +18,22 @@
           猫を探す
         </router-link>
       </li>
-      <li v-if="!authCheck"  class="login">
+      <li v-if="!authCheck" class="login">
         <router-link :to="{ name: 'userLogin' }">
           ログイン
         </router-link>
       </li>
       <v-menu v-if="authCheck">
         <template v-slot:activator="{ attrs, on }">
-          <v-btn
-            height="70"
-            width="120"
-            tile
-            depressed
-            color="#f6bba6"
-            v-bind="attrs"
-            v-on="on"
-          >
+          <v-btn height="70" width="120" tile depressed color="#f6bba6" v-bind="attrs" v-on="on">
             <v-img
               class="user-image"
               height="50"
               width="50"
-              :src="`/storage/userImages/${user.image}`"
+              :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${user.image}`"
             >
             </v-img>
+
             <v-icon right dark>
               mdi-chevron-down
             </v-icon>
@@ -48,7 +41,6 @@
         </template>
 
         <v-list width="200" color="#E2E0CB">
-
           <v-list-item class="list-item-name">
             {{ user.name }}
           </v-list-item>
@@ -63,14 +55,16 @@
             </router-link>
           </v-list-item>
           <v-list-item class="list-item">
-            <router-link :to="{ 
-              name: 'catFavorite',
-              params: { userId:user.id },
-            }">
+            <router-link
+              :to="{
+                name: 'catFavorite',
+                params: { userId: user.id },
+              }"
+            >
               お気に入り猫
             </router-link>
           </v-list-item>
-          
+
           <v-list-item class="list-item">
             <router-link :to="{ name: 'chatList' }">
               チャットリスト
@@ -118,14 +112,14 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('auth/logout',this.$route.path);
+      this.$store.dispatch('auth/logout', this.$route.path);
     },
   },
 };
 </script>
 
 <style scoped>
-a{
+a {
   color: black;
 }
 
@@ -192,19 +186,18 @@ ul {
   opacity: 0.6;
 }
 
-
-
 .user-image {
   border-radius: 50%;
 }
 
-.list-item,.list-item-name{
+.list-item,
+.list-item-name {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.list-item a{
+.list-item a {
   display: flex;
   justify-content: center;
   align-items: center;

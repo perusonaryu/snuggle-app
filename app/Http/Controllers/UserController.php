@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
-
+use Storage;
 
 class UserController extends Controller
 {
@@ -22,12 +22,13 @@ class UserController extends Controller
         $user->region = $request->region;
         if(!is_string($request->image)){
             
-            $pathdel = public_path().'/storage/userImages/'.$user->image;
-            \File::delete($pathdel);
-
-            $file_name = $user->id.'-'.$request->image->getClientOriginalName();
-            $request->image->storeAs('public/userImages',$file_name);
-            $user->image = $file_name;
+            $image_delete = Storage::disk('s3')->delete($user->image);
+            // $pathdel = public_path().'/storage/userImages/'.$user->image;
+            // \File::delete($pathdel);
+            // $file_name = $user->id.'-'.$request->image->getClientOriginalName();
+            // $request->image->storeAs('public/userImages',$file_name);
+            $path = Storage::disk('s3')->put('/userImages', $request->image, 'public');
+            $user->image = $path;
         }
 
         $user->save();

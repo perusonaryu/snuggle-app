@@ -12,17 +12,23 @@
       outlined
     ></v-select>
     <v-file-input
+      accept="image/png, image/jpeg"
       multiple
       label="プロフィール画像"
-      prepend-inner-icon="mdi-camera"
-      prepend-icon
+      prepend-icon="mdi-camera"
       show-size
       v-on:change="confirmImage"
     ></v-file-input>
 
     <p>
       <v-img
-        v-if="!confirmedImageShow"
+        v-if="!confirmedImageShow && userData.image.match('userImages')"
+        :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${beforeUserImage}`"
+        height="200"
+        width="250"
+      />
+      <v-img
+        v-else-if="!confirmedImageShow"
         :src="`/storage/userImages/${beforeUserImage}`"
         height="200"
         width="250"
@@ -30,11 +36,10 @@
       <v-img v-else-if="confirmedImageShow" :src="confirmedImage" height="200" width="250" />
     </p>
     <div class="btn-wrap">
-        <v-btn class="save-btn" @click="update" color="#F6BBA6" width="250" height="50">
-          保存
-        </v-btn>
-      </div>
-
+      <v-btn class="save-btn" @click="update" color="#F6BBA6" width="250" height="50">
+        保存
+      </v-btn>
+    </div>
   </v-container>
 </template>
 

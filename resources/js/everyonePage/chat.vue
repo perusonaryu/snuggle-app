@@ -6,9 +6,17 @@
           <div>
             <v-img
               class="chat-user-image"
+              :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${chatUserData.image}`"
+              width="50"
+              height="50"
+              v-if="chatUserData.image.match('userImages')"
+            ></v-img>
+            <v-img
+              class="chat-user-image"
               :src="`/storage/userImages/${chatUserData.image}`"
               width="50"
               height="50"
+              v-else
             ></v-img>
           </div>
           <h4>{{ chatUserData.name }}さん</h4>
