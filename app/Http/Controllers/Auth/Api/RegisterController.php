@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -56,8 +57,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         if ($data['image']) {
-            $file_name = Str::random(20).'-'.$data['image']->getClientOriginalName();
-            $data['image']->storeAs('public/userImages',$file_name);
+            // $file_name = Str::random(20).'-'.$data['image']->getClientOriginalName();
+            // $data['image']->storeAs('public/userImages',$file_name);
+
+            $path = Storage::disk('s3')->put('/userImages', $data['image'], 'public');
 
             
             return User::create([
@@ -65,7 +68,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'region' => $data['region'],
-                'image' => $file_name,
+                'image' => $path,
                 
             ]);
         }

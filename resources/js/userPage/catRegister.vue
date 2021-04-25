@@ -188,7 +188,6 @@ export default {
       }
     },
     confirmImage(e) {
-      console.log(e[0]);
       this.form.image = e[0];
       this.createImage(this.form.image);
     },

@@ -4,13 +4,20 @@
       <v-card class="mx-auto" max-width="400" outlined>
         <v-list-item three-line>
           <v-list-item-avatar rounded="50%" size="100">
-            <v-img :src="`/storage/catImages/${catData.image}`"></v-img>
+            <v-img
+              :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${catData.image}`"
+              v-if="catData.image.match('catImages')"
+            ></v-img>
+            <v-img :src="`/storage/catImages/${catData.image}`" v-else></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">
               {{ catData.name }}
             </v-list-item-title>
-            <v-list-item-subtitle> {{ catData.age }}さい </v-list-item-subtitle>
+            <v-list-item-subtitle v-if="catData.age.length <= 1">
+              {{ catData.age }}さい
+            </v-list-item-subtitle>
+            <v-list-item-subtitle v-else> {{ catData.age }} </v-list-item-subtitle>
             <v-list-item-subtitle> 性格：{{ catData.personality }} </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -36,7 +43,9 @@
                 <v-toolbar color="red" dark class="text-h5 mb-5">本当に削除しますか？</v-toolbar>
                 <v-card-text>
                   <div class="d-flex justify-center">
-                    <v-btn color="red" outlined rounded text @click="catDelete(catData.id)" >はい</v-btn>
+                    <v-btn color="red" outlined rounded text @click="catDelete(catData.id)"
+                      >はい</v-btn
+                    >
                     <v-btn outlined rounded text @click="dialog.value = false">いいえ</v-btn>
                   </div>
                 </v-card-text>
@@ -88,17 +97,15 @@ export default {
         })
         .then(result => {
           this.$store.dispatch('cat/myCatsListGet', { userId: this.user.id, token: token });
-          dialog.value = false
+          dialog.value = false;
         });
-
     },
   },
 };
 </script>
 
 <style scoped>
-
-.delete-dialog{
+.delete-dialog {
   height: 400px;
 }
 </style>

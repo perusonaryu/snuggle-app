@@ -84,7 +84,12 @@
         ></v-file-input>
         <p>
           <v-img
-            v-if="!confirmedImageShow"
+            v-if="!confirmedImageShow && beforeCatImage.match('catImages')"
+            :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${beforeCatImage}`"
+            width="350"
+          />
+          <v-img
+            v-else-if="!confirmedImageShow"
             :src="`/storage/catImages/${beforeCatImage}`"
             width="350"
           />
@@ -161,7 +166,6 @@ export default {
 
   methods: {
     confirmImage(e) {
-      console.log(e);
       if (e[0]) {
         this.catData.image = e[0];
         this.createImage(this.catData.image);

@@ -15,9 +15,10 @@ class CatController extends Controller
         $this->validator($request->all())->validate();
 
         if($request->image){
-            $file_name = $request->userId.'-'.$request->image->getClientOriginalName();
-
-            $request->image->storeAs('public/catImages',$file_name);
+            // $file_name = $request->userId.'-'.$request->image->getClientOriginalName();
+            // $request->image->storeAs('public/catImages',$file_name);
+            
+            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
 
             Cat::create([
                 'name' => $request->name,
@@ -25,7 +26,7 @@ class CatController extends Controller
                 'personality' => $request->personality,
                 'background' => $request->background,
                 'gender' => $request->gender,
-                'image' => $file_name,
+                'image' => $path,
                 'user_id' => $request->userId,
                 'region' => $request->region,
                 'castration_surgery' => $request->castrationSurgery,
@@ -79,13 +80,15 @@ class CatController extends Controller
         $cat->vaccine = $request->vaccine;
         if(!is_string($request->image)){
             
+            $image_delete = Storage::disk('s3')->delete($request->image);
+            // $pathdel = public_path().'/storage/catImages/'.$cat->image;
+            // \File::delete($pathdel);
 
-            $pathdel = public_path().'/storage/catImages/'.$cat->image;
-            \File::delete($pathdel);
+            // $file_name = $cat->user_id.'-'.$request->image->getClientOriginalName();
+            // $request->image->storeAs('public/catImages',$file_name);
+            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
 
-            $file_name = $cat->user_id.'-'.$request->image->getClientOriginalName();
-            $request->image->storeAs('public/catImages',$file_name);
-            $cat->image = $file_name;
+            $cat->image = $path;
         }
 
         $cat->save();
