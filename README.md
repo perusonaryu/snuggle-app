@@ -25,7 +25,8 @@ snuggleは猫を買いたい人、今は猫が買えないが猫が好きな人�
     * Laravel 7.30.4
 
 * インフラ
-    * MySQL 5.7
+    * Docker/Docker-compose
+    * MySQL 8.0
     * Nginx
     * AWS(EC2,RDS,Route53,VPC)
     * Circle(CI/CD)
@@ -45,7 +46,8 @@ snuggleは猫を買いたい人、今は猫が買えないが猫が好きな人�
 </p>
 
 ## 工夫した点
-* フロントエンドにVue.jsを採用してSPAで構築している点。
+* dockerを使用して環境構築
+* フロントエンドにVue.jsを採用してSPAで構築。
 * AWS、CircleCIの導入。
 * シンプルで見やすいUI構成。
 * レスポンシブ対応
