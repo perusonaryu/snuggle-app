@@ -6,7 +6,7 @@
         name: 'topPage',
       }"
     >
-      <img src="/storage/nekologo3.png" />
+      <img src="/nekologo3.png" />
     </router-link>
     <ul>
       <li>

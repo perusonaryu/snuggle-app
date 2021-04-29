@@ -7,7 +7,7 @@
           name: 'topPage',
         }"
       >
-        <img src="/storage/nekologo3.png" />
+        <img src="/nekologo3.png" />
       </router-link>
     </div>
     <p class="copyright text-center">Copyright &copy; snuggle All Rights Reserved</p>
