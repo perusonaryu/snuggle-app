@@ -18,8 +18,9 @@
           伴侶動物との暮らしを考える。
         </p>
         <p>
-          受け入れたこの親になるという事。
-          未来の楽しい暮らしを想像しながら、あなたが引き取る子を選んでください。
+          受け入れたこの親になるという事。<br class="sp" />
+          未来の楽しい暮らしを想像しながら、<br class="sp" />
+          あなたが引き取る子を選んでください。<br class="sp" />
         </p>
       </div>
     </div>
@@ -49,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.wrap{
+.wrap {
   margin: 0 0 50px;
 }
 
@@ -80,7 +81,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size:20px;
+  font-size: 20px;
 }
 
 .register-btn:hover {
@@ -102,8 +103,46 @@ export default {
   font-size: 16px;
 }
 
-.adoption-text p+p {
+.adoption-text .sp {
+  display: none;
+}
+
+.adoption-text p + p {
   margin-top: 40px;
+}
+
+@media screen and (max-width: 480px) {
+  .top-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 300px;
+  }
+
+  .register-btn {
+    width: 200px;
+    height: 50px;
+    top: 60%;
+  }
+
+  .register-btn a {
+    font-size: 15px;
+  }
+
+  .adoption{
+    padding-bottom:50px;
+  }
+
+  .adoption-text {
+    margin-top: 30px;
+  }
+  .adoption-text p {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .adoption-text .sp {
+    display: block;
+  }
 }
 </style>
 
