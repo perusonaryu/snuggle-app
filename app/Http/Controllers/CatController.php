@@ -99,14 +99,10 @@ class CatController extends Controller
 
 
     //県名での検索
-    public function search(Request $request){
-        $searched_cats_data = Cat::select('cats.*')
-            ->join('users','cats.user_id', '=','users.id')
-            ->where('region','like', '%'.$request[0].'%')
+    public function search(Request $request){        
+        $searched_cats_data = Cat::where('region','like', '%'.$request[0].'%')
             ->orderBy('created_at', 'desc')
             ->get();
-
-
         return json_encode(['searchedCatsData' => $searched_cats_data]);
     }
 
