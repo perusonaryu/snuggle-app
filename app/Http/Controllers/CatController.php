@@ -54,7 +54,6 @@ class CatController extends Controller
     }
 
     public function topGet(){
-        // $cats =  Cat::take(9)->orderBy('created_at', 'desc')->get();
         $cats =  Cat::orderBy('created_at', 'desc')->paginate(6);
 
         return json_encode(['catsData' => $cats]);
@@ -95,13 +94,6 @@ class CatController extends Controller
                 $image_delete = Storage::disk('s3')->delete($request->image);
                 $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
             }
-            $image_delete = Storage::disk('s3')->delete($request->image);
-            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
-            // $pathdel = public_path().'/storage/catImages/'.$cat->image;
-            // \File::delete($pathdel);
-            // $file_name = $cat->user_id.'-'.$request->image->getClientOriginalName();
-            // $request->image->storeAs('public/catImages',$file_name);
-
             $cat->image = $path;
         }
 

@@ -81,10 +81,6 @@ export default {
       .then((res) => {
         const result = res.data.catsData;
         this.CatsData = result.data;
-
-        // const wrap = document.getElementsByClassName('wrap');
-        // const wrap_position = wrap.getBoundingClientRect();
-        // scrollTo(0, wrap_position);
       })
       .catch( (error) => {
         console.log(error);
