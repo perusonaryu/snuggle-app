@@ -25,12 +25,21 @@
       </li>
       <v-menu v-if="authCheck">
         <template v-slot:activator="{ attrs, on }">
-          <v-btn height="70" width="120" tile depressed color="#f6bba6" v-bind="attrs" v-on="on">
+          <v-btn
+            height="70"
+            width="120"
+            tile
+            depressed
+            color="#f6bba6"
+            v-bind="attrs"
+            v-on="on"
+          >
             <v-img
               class="user-image"
               height="50"
               width="50"
-              :src="`https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${user.image}`"
+              v-if="userImage"
+              :src="userImage"
             >
             </v-img>
 
@@ -85,6 +94,7 @@
 export default {
   data: () => ({
     authCheck: false,
+    userImage:'',
   }),
   computed: {
     user() {
@@ -105,6 +115,11 @@ export default {
     user: function(userData, undefind) {
       if (userData && userData != 'null') {
         this.authCheck = true;
+        if(userData.image.match('-')){
+          this.userImage = `/storage/userImages/${userData.image}`
+        }else{
+          this.userImage = `https://snuggle-app.s3.ap-northeast-1.amazonaws.com/${userData.image}`;
+        }
       } else {
         this.authCheck = false;
       }
@@ -209,5 +224,11 @@ ul {
 .list-item:hover {
   background: white;
   opacity: 0.7;
+}
+
+@media screen and (max-width: 480px) {
+  .header ul li {
+    width: 100px;
+  }
 }
 </style>

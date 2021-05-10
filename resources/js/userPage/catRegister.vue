@@ -205,8 +205,7 @@ export default {
 
 <style scoped>
 .wrap {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin: 100px 10px 100px;
 }
 </style>
 

@@ -57,10 +57,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         if ($data['image']) {
+            $path = '';
+            if(app()->environment('local')){
+                $path = Str::random(20).'-'.$data['image']->getClientOriginalName();
+                $data['image']->storeAs('public/userImages',$path);
+            }elseif(app()->environment('production')){
+                $path = Storage::disk('s3')->put('/userImages', $data['image'], 'public');
+            }
+
+
             // $file_name = Str::random(20).'-'.$data['image']->getClientOriginalName();
             // $data['image']->storeAs('public/userImages',$file_name);
 
-            $path = Storage::disk('s3')->put('/userImages', $data['image'], 'public');
+            // $path = Storage::disk('s3')->put('/userImages', $data['image'], 'public');
 
             
             return User::create([

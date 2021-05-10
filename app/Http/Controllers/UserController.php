@@ -21,13 +21,22 @@ class UserController extends Controller
         $user->introduction = $request->introduction;
         $user->region = $request->region;
         if(!is_string($request->image)){
-            
-            $image_delete = Storage::disk('s3')->delete($user->image);
+            $path = '';
+            if(app()->environment('local')){
+                $pathdel = public_path().'/storage/userImages/'.$user->image;
+                \File::delete($pathdel);
+                $psth = $user->id.'-'.$request->image->getClientOriginalName();
+                $request->image->storeAs('public/userImages',$path);
+            }elseif(app()->environment('production')){
+                $image_delete = Storage::disk('s3')->delete($user->image);
+                $path = Storage::disk('s3')->put('/userImages', $request->image, 'public');
+            }
+            // $image_delete = Storage::disk('s3')->delete($user->image);
+            // $path = Storage::disk('s3')->put('/userImages', $request->image, 'public');
             // $pathdel = public_path().'/storage/userImages/'.$user->image;
             // \File::delete($pathdel);
             // $file_name = $user->id.'-'.$request->image->getClientOriginalName();
             // $request->image->storeAs('public/userImages',$file_name);
-            $path = Storage::disk('s3')->put('/userImages', $request->image, 'public');
             $user->image = $path;
         }
 
