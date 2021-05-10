@@ -64,13 +64,6 @@ class RegisterController extends Controller
             }elseif(app()->environment('production')){
                 $path = Storage::disk('s3')->put('/userImages', $data['image'], 'public');
             }
-
-
-            // $file_name = Str::random(20).'-'.$data['image']->getClientOriginalName();
-            // $data['image']->storeAs('public/userImages',$file_name);
-
-            // $path = Storage::disk('s3')->put('/userImages', $data['image'], 'public');
-
             
             return User::create([
                 'name' => $data['name'],

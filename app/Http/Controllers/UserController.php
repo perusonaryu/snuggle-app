@@ -10,8 +10,6 @@ use Storage;
 class UserController extends Controller
 {
     public function update(Request $request){
-
-        // dd($request -> all());
         // リクエストを検証します。
         $this->validator($request->all())->validate();
 
@@ -31,12 +29,6 @@ class UserController extends Controller
                 $image_delete = Storage::disk('s3')->delete($user->image);
                 $path = Storage::disk('s3')->put('/userImages', $request->image, 'public');
             }
-            // $image_delete = Storage::disk('s3')->delete($user->image);
-            // $path = Storage::disk('s3')->put('/userImages', $request->image, 'public');
-            // $pathdel = public_path().'/storage/userImages/'.$user->image;
-            // \File::delete($pathdel);
-            // $file_name = $user->id.'-'.$request->image->getClientOriginalName();
-            // $request->image->storeAs('public/userImages',$file_name);
             $user->image = $path;
         }
 
