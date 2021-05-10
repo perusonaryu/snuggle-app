@@ -15,10 +15,15 @@ class CatController extends Controller
         $this->validator($request->all())->validate();
 
         if($request->image){
-            // $file_name = $request->userId.'-'.$request->image->getClientOriginalName();
-            // $request->image->storeAs('public/catImages',$file_name);
+            $path = '';
+            if(app()->environment('local')){
+                $path = $request->userId.'-'.$request->image->getClientOriginalName();
+                $request->image->storeAs('public/catImages',$path);
+            }elseif(app()->environment('production')){
+                $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
+            }
             
-            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
+            
 
             Cat::create([
                 'name' => $request->name,
@@ -49,7 +54,8 @@ class CatController extends Controller
     }
 
     public function topGet(){
-        $cats =  Cat::take(9)->orderBy('created_at', 'desc')->get();
+        // $cats =  Cat::take(9)->orderBy('created_at', 'desc')->get();
+        $cats =  Cat::orderBy('created_at', 'desc')->paginate(6);
 
         return json_encode(['catsData' => $cats]);
     }
@@ -79,14 +85,22 @@ class CatController extends Controller
         $cat->castration_surgery = $request->castrationSurgery;
         $cat->vaccine = $request->vaccine;
         if(!is_string($request->image)){
-            
+            $path = '';
+            if(app()->environment('local')){
+                $pathdel = public_path().'/storage/catImages/'.$cat->image;
+                \File::delete($pathdel);
+                $path = $cat->user_id.'-'.$request->image->getClientOriginalName();
+                $request->image->storeAs('public/catImages',$path);
+            }elseif(app()->environment('production')){
+                $image_delete = Storage::disk('s3')->delete($request->image);
+                $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
+            }
             $image_delete = Storage::disk('s3')->delete($request->image);
+            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
             // $pathdel = public_path().'/storage/catImages/'.$cat->image;
             // \File::delete($pathdel);
-
             // $file_name = $cat->user_id.'-'.$request->image->getClientOriginalName();
             // $request->image->storeAs('public/catImages',$file_name);
-            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
 
             $cat->image = $path;
         }

@@ -43,7 +43,7 @@ Route::delete('cat/delete/{cat_id}','CatController@delete')->name('cat.delete');
 //猫掲載者の情報を取得
 Route::get('posted/user/detail/{id}','UserController@detail');
 
-
+//トップページ猫データ取得
 Route::get('cats/topdata','CatController@topget');
 Route::get('cats/data','CatController@get');
 Route::get('cat/detail/{id}','CatController@detail');
