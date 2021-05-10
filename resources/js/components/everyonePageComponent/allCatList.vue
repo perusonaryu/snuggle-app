@@ -44,7 +44,13 @@
       </v-col>
     </v-row>
     <div class="text-center">
-      <v-pagination v-model="page" :length="lastPage" @input="getCats" circle color="#f6bba6"></v-pagination>
+      <v-pagination
+        v-model="page"
+        :length="lastPage"
+        @input="getCats"
+        circle
+        color="#f6bba6"
+      ></v-pagination>
     </div>
   </div>
 </template>
@@ -54,7 +60,7 @@ export default {
   data: () => ({
     CatsData: '',
     page: 1,
-    lastPage:1,
+    lastPage: 1,
   }),
   props: ['userId'],
 
@@ -67,25 +73,38 @@ export default {
         this.lastPage = result.last_page;
       }
     });
-  },
-  created() {
-    this.getCats(this.page);
+
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+    if (params.get('page') != 'null') {
+      this.page = parseInt(params.get('page'));
+      this.getCats(this.page);
+    }else{
+      this.getCats(this.page);
+    }
   },
   methods: {
-    getCats(page){
-      axios.get('api/cats/topdata' ,{
-        params:{
-          page:parseInt(page),
-        },
-      })
-      .then((res) => {
-        const result = res.data.catsData;
-        this.CatsData = result.data;
-      })
-      .catch( (error) => {
-        console.log(error);
-      })
-    }
+    getCats(page) {
+      axios
+        .get('api/cats/topdata', {
+          params: {
+            page: parseInt(page),
+          },
+        })
+        .then(res => {
+          const result = res.data.catsData;
+          this.CatsData = result.data;
+
+          let url = '/';
+          if (this.page > 1) {
+            url += '?page=' + this.page;
+          }
+          window.history.pushState(null, null, url);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
