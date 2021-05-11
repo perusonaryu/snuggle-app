@@ -49,9 +49,9 @@
           ></v-select>
           <v-file-input
             multiple
+            accept="image/png, image/jpeg"
             label="プロフィール画像"
-            prepend-inner-icon="mdi-camera"
-            prepend-icon
+            prepend-icon="mdi-camera"
             show-size
             v-on:change="confirmImage"
             :rules="imageRules"
