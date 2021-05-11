@@ -10,20 +10,20 @@ use Illuminate\Support\Facades\Storage;
 
 class CatController extends Controller
 {
-    public function register(Request $request){
-
+    public function register(Request $request)
+    {
         $this->validator($request->all())->validate();
 
-        if($request->image){
+        if ($request->image) {
             $path = '';
-            if(app()->environment('local')){
-                $path = $request->userId.'-'.$request->image->getClientOriginalName();
-                $request->image->storeAs('public/catImages',$path);
-            }elseif(app()->environment('production')){
-                $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
-            }
+            // if(app()->environment('local')){
+            //     $path = $request->userId.'-'.$request->image->getClientOriginalName();
+            //     $request->image->storeAs('public/catImages',$path);
+            // }elseif(app()->environment('production')){
+            //     $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
+            // }
             
-            
+            $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
 
             Cat::create([
                 'name' => $request->name,
@@ -42,37 +42,42 @@ class CatController extends Controller
         }
     }
 
-    public function detail($id){
-        $cat_data = Cat::where('id',$id)->get();
+    public function detail($id)
+    {
+        $cat_data = Cat::where('id', $id)->get();
         return json_encode(['catData' => $cat_data]);
     }
 
-    public function get(){
+    public function get()
+    {
         $cats =  Cat::orderBy('created_at', 'desc')->get();
 
         return json_encode(['catsData' => $cats]);
     }
 
-    public function topGet(){
+    public function topGet()
+    {
         $cats =  Cat::orderBy('created_at', 'desc')->paginate(6);
 
         return json_encode(['catsData' => $cats]);
     }
 
-    public function catslistget($id){
-        $mycatslist = Cat::where('user_id',$id)->get();
+    public function catslistget($id)
+    {
+        $mycatslist = Cat::where('user_id', $id)->get();
 
         return json_encode(['myCatsList' => $mycatslist]);
     }
 
-    public function edit($id){
-        $cat_data = Cat::where('id',$id)->get();
+    public function edit($id)
+    {
+        $cat_data = Cat::where('id', $id)->get();
 
         return json_encode(['catData'=>$cat_data]);
     }
 
-    public function update(Request $request){
-
+    public function update(Request $request)
+    {
         $this->updatevalidator($request->all())->validate();
         $cat = Cat::find($request->id);
         $cat->name = $request->name;
@@ -83,48 +88,59 @@ class CatController extends Controller
         $cat->region = $request->region;
         $cat->castration_surgery = $request->castrationSurgery;
         $cat->vaccine = $request->vaccine;
-        if(!is_string($request->image)){
+        if (!is_string($request->image)) {
             $path = '';
-            if(app()->environment('local')){
+            if (app()->environment('local')) {
                 $pathdel = public_path().'/storage/catImages/'.$cat->image;
                 \File::delete($pathdel);
                 $path = $cat->user_id.'-'.$request->image->getClientOriginalName();
-                $request->image->storeAs('public/catImages',$path);
-            }elseif(app()->environment('production')){
-                $image_delete = Storage::disk('s3')->delete($request->image);
+                $request->image->storeAs('public/catImages', $path);
+            } elseif (app()->environment('production')) {
+                $image_delete = Storage::disk('s3')->delete($cat->image);
                 $path = Storage::disk('s3')->put('/catImages', $request->image, 'public');
             }
+            
             $cat->image = $path;
         }
 
         $cat->save();
 
         return json_encode(['catData' => $cat]);
-
     }
 
 
     //県名での検索
-    public function search(Request $request){        
-        $searched_cats_data = Cat::where('region','like', '%'.$request[0].'%')
+    public function search(Request $request)
+    {
+        $searched_cats_data = Cat::where('region', 'like', '%'.$request[0].'%')
             ->orderBy('created_at', 'desc')
             ->get();
         return json_encode(['searchedCatsData' => $searched_cats_data]);
     }
 
     //お気に入りの猫だけを取得
-    public function favoriteCatsGet($id){
-        $favolit_cats = Cat::select('cats.*')->join('likes','cats.id', '=' , 'likes.cat_id')->where('likes.user_id',$id)->get();
+    public function favoriteCatsGet($id)
+    {
+        $favolit_cats = Cat::select('cats.*')->join('likes', 'cats.id', '=', 'likes.cat_id')->where('likes.user_id', $id)->get();
 
         
         return json_encode(['favolitCatsData' => $favolit_cats]);
     }
 
     //猫削除
-    public function delete($cat_id){
+    public function delete($cat_id)
+    {
         $cat_data = Cat::find($cat_id);
-        $pathdel = public_path().'/storage/catImages/'.$cat_data->image;
-        \File::delete($pathdel);
+
+        if (app()->environment('local')) {
+            $pathdel = public_path().'/storage/catImages/'.$cat_data->image;
+            \File::delete($pathdel);
+        } elseif (app()->environment('production')) {
+            $image_delete = Storage::disk('s3')->delete($cat_data->image);
+        }
+        
+
+        
 
         $cat_data->delete();
 
